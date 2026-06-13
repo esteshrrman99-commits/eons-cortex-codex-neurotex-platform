@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T13:36:01.171Z",
+  "generated_at": "2026-06-13T13:40:20.364Z",
   "mode": "private-review-static-pages",
   "rows": [
     {
@@ -12,7 +12,7 @@
     },
     {
       "file": "public/assets/style.css",
-      "sha256": "57297b703df5117cbeb3a5a78e088635f741fa5ba67ca6b075102334ef779b4b"
+      "sha256": "6674716dfa4a171db1ad136e7833423b4e68e707d16e31e3bd1f459c6901023f"
     },
     {
       "file": "public/assets/app.js",
@@ -20,7 +20,7 @@
     },
     {
       "file": "scripts/build.js",
-      "sha256": "a964ebc5b72161ec82da5c8f1b97400a6289dfd3f487cfc3ecc7a339c2f08949"
+      "sha256": "eb2435552646fdfae07fc24cdcc54585adc556f26858810ec2b2fb1218a73f35"
     },
     {
       "file": "scripts/verify.js",

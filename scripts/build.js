@@ -1,1 +1,22 @@
-const fs=require('fs'),path=require('path');function cp(s,d){fs.mkdirSync(path.dirname(d),{recursive:true});fs.copyFileSync(s,d)}fs.rmSync('docs',{recursive:true,force:true});fs.mkdirSync('docs/assets',{recursive:true});for(const f of ['index.html','assets/style.css','assets/app.js'])cp(path.join('public',f),path.join('docs',f));fs.writeFileSync('docs/.nojekyll','');fs.writeFileSync('docs/robots.txt','User-agent: *\nDisallow: /\n');fs.writeFileSync('docs/CNAME.template','Add custom domain later, then rename this file to CNAME.\n');console.log('Built docs/ for GitHub Pages.');
+
+const fs=require('fs');
+fs.rmSync('docs',{recursive:true,force:true});
+fs.cpSync('public','docs',{recursive:true});
+function inject(dir){
+  for(const name of fs.readdirSync(dir)){
+    const p=dir+'/'+name;
+    const st=fs.statSync(p);
+    if(st.isDirectory()) inject(p);
+    if(st.isFile() && p.endsWith('.html')){
+      let s=fs.readFileSync(p,'utf8');
+        const rel=p.includes('/pages/')?'../assets/eons-upload-intake.js':'assets/eons-upload-intake.js';
+        s=s.replace('</body>','<script src="'+rel+'"></script></body>');
+        fs.writeFileSync(p,s);
+      }
+    }
+  }
+}
+inject('docs');
+fs.writeFileSync('docs/.nojekyll','');
+fs.writeFileSync('docs/robots.txt','User-agent: *\nDisallow: /\n');
+console.log('Built docs/ for GitHub Pages with universal upload import.');
