@@ -1,0 +1,17 @@
+{
+  "schema_name": "EONS_MATTER_CASE_FILE_SCHEMA",
+  "status": "browser_local_draft",
+  "fields": {
+    "matter_id": "future backend unique id",
+    "entity_or_person": "entity/person name",
+    "tax_year_or_period": "year or period",
+    "matter_name": "short matter title",
+    "issue_type": "category of compliance issue",
+    "reviewer": "CPA/EA/tax attorney/bookkeeper/owner",
+    "deadline": "date if applicable",
+    "status": "draft/evidence needed/ready for review/blocked/closed",
+    "linked_record_ids": "local EONS Record IDs",
+    "owner_notes": "notes and missing proof",
+    "review_gate": "professional review required"
+  }
+}
