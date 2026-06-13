@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Supabase Private Pilot</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">SUPABASE PROMPT 4</p><h1>Private pilot test plan</h1><p>Use fake records only to test the future Supabase-backed evidence vault. Real sensitive production upload remains blocked.</p><div class="chips"><span>Pilot: Fake Records Only</span><span>RLS: Required</span><span>Production: Blocked</span></div></section><section class="card"><h2>Pilot Test Sequence</h2><pre>1. Create fake matter file.
+2. Create fake evidence record.
+3. Create fake upload metadata.
+4. Create fake audit event.
+5. Create fake reviewer note.
+6. Confirm RLS blocks unauthorized access.
+7. Confirm private bucket is not public.
+8. Confirm service role key is not in browser code.
+9. Confirm backend CORS is restricted.
+10. Confirm backup/export process is documented.
+11. Confirm reviewer status stays review_required.
+12. Confirm sensitive upload remains blocked until owner approval.</pre></section><section class="card"><h2>Fake Record Only</h2><pre>Allowed:
+- Demo Entity
+- Fake receipt placeholder
+- Fake upload metadata
+- Fake reviewer note
+- Fake audit event
+
+Not allowed:
+- SSNs
+- bank records
+- tax transcripts
+- IDs
+- medical records
+- real legal evidence
+- actual private client/family data</pre></section><section class="card"><h2>Pass / Fail</h2><pre>PASS:
+Fake records move through approved backend flow, RLS blocks unauthorized access, private bucket is locked, audit events are recorded.
+
+FAIL:
+Any real sensitive data is used, any key appears in Git/browser/chat, public bucket access is enabled, RLS is disabled, or upload bypasses the backend gate.</pre></section><section class="card"><h2>Next</h2><p>Next step is Supabase Prompt 5: private backend deployment checklist for runtime secrets outside Git.</p><p><a class="button" href="supabase-setup-guide.html">Supabase Setup Guide</a></p><p><a class="button" href="supabase-adapter.html">Supabase Adapter</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main></body></html>
