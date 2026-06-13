@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T13:51:40.597Z",
+  "generated_at": "2026-06-13T13:53:19.452Z",
   "mode": "private-review-static-pages",
   "rows": [
     {
@@ -8,7 +8,7 @@
     },
     {
       "file": "public/index.html",
-      "sha256": "4eb50456ed004d6b4d7e852b27ef4027b9ba4ba147bdae26df2d4d6f20cacebc"
+      "sha256": "6cedb3d9b22360fd2da59d9e19c5e5c1bdb61aac6d26879bbf3f9c6308f1fa83"
     },
     {
       "file": "public/assets/style.css",
