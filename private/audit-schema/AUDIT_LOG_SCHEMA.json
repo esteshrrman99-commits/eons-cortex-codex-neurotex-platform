@@ -1,0 +1,20 @@
+{
+  "schema_name": "EONS_AUDIT_LOG_SCHEMA",
+  "status": "draft_backend_readiness",
+  "fields": {
+    "audit_id": "unique event id",
+    "timestamp_utc": "ISO timestamp",
+    "actor_id": "owner/user/reviewer id",
+    "actor_role": "owner/admin/reviewer",
+    "action_type": "upload/import/classify/edit/review/export/delete",
+    "record_id": "linked evidence record id",
+    "file_id": "linked file id if applicable",
+    "before_hash": "hash before change if applicable",
+    "after_hash": "hash after change if applicable",
+    "ip_or_device_note": "optional security metadata",
+    "review_status": "draft/review_required/approved/rejected",
+    "external_action": "true/false",
+    "notes": "human-readable event notes"
+  },
+  "rule": "External actions remain disabled unless owner-approved and professionally reviewed."
+}

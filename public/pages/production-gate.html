@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Production Gate Status</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">PRODUCTION GATE STATUS</p><h1>Encrypted vault readiness</h1><p>This page tracks what must exist before real sensitive evidence upload, OCR/PDF/DOC parsing, user login, permanent storage, or professional reliance.</p></section><section class="card"><h2>Current Status</h2><pre>MODE: Static GitHub Pages staging
+Sensitive uploads: BLOCKED for production use
+Permanent storage: NOT ENABLED
+Authentication: NOT ENABLED
+Encrypted evidence vault: NOT ENABLED
+OCR/PDF/DOC parser: NOT ENABLED
+Audit log backend: NOT ENABLED
+External submissions: DISABLED
+Professional reliance: REVIEW REQUIRED</pre></section><section class="card"><h2>Production Checklist</h2><button onclick="showGate()">Check production gate</button><pre id="out">Waiting for gate check.</pre></section><section class="card"><h2>Safe Rule</h2><p>The current platform can organize local drafts and browser-local imports. It must not be used as final secure evidence storage until authentication, encrypted storage, backups, audit logs, and professional review workflows are implemented.</p><p><a class="button" href="../index.html">Back to Owner Console</a></p></section></main><script>function showGate(){document.getElementById('out').textContent='EONS PRODUCTION GATE\\n\\nRequired before production:\\n- Owner-approved authentication\\n- Encrypted file storage\\n- Private database\\n- OCR/PDF/DOC parser\\n- Audit log schema\\n- Backup and recovery plan\\n- Access controls\\n- Privacy policy and terms\\n- Professional review workflow\\n- Security review\\n\\nCurrent decision: BLOCKED / STAGING ONLY';}</script><script src="../assets/eons-field-instructions.js"></script></body></html>
