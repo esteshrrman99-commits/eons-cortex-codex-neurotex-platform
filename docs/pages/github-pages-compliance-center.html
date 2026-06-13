@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS GitHub Pages Compliance Center</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">GITHUB PAGES COMPLIANCE CENTER</p><h1>Static control layer + real backend gate</h1><p>GitHub Pages remains the permanent free front-end/control surface. Sensitive production upload is only allowed through a private backend after every real gate passes.</p><div class="chips"><span>Pages: Control UI</span><span>Secrets: Not in browser</span><span>Upload: Backend gated</span></div></section><section class="card"><h2>GitHub Pages Can Safely Handle</h2><pre>- public/static interface
+- proof reports
+- route maps
+- local draft packets
+- browser-local checklist tools
+- backend status connector pages
+- reviewer workflow instructions</pre></section><section class="card"><h2>GitHub Pages Cannot Be</h2><pre>- private encrypted database
+- runtime secret manager
+- sensitive production file vault
+- backend authentication server
+- private audit-log database
+- professional review authority</pre></section><section class="card"><h2>Real Compliance Gates Required</h2><pre>Auth: private backend login required
+Encryption: server-side encryption required
+Database: private database required
+Private storage: private encrypted bucket required
+Secrets: provider/GitHub Actions secrets only
+Backup: encrypted backup + restore test required
+Audit logging: backend append-only events required
+CORS: backend locked to approved origin
+Reviewer approval: CPA/EA/tax attorney workflow required</pre></section><section class="card"><h2>Backend Gate Test</h2><p>Paste the backend URL only after the private backend is deployed. Do not paste secrets.</p><input id="base" style="width:100%;padding:14px;border-radius:14px;font-size:16px" placeholder="https://your-private-backend.example.com"><button onclick="saveBase()">Save backend URL locally</button><button onclick="checkGate()">Check /production-readiness</button><button onclick="testUpload()">Test /sensitive-upload guard</button><pre id="out">Waiting for backend gate check.</pre></section><section class="card"><h2>Decision</h2><pre>GitHub Pages approved for:
+- free permanent static hosting
+- compliance control dashboard
+- module registry
+- proof/report pages
+
+GitHub Pages denied for:
+- real sensitive production uploads
+- secrets
+- private database
+- encrypted file vault
+
+Sensitive upload must stay blocked until the private backend passes all real gates.</pre></section><section class="card"><h2>Boundary</h2><p>This module does not turn GitHub Pages into a backend. It makes the front-end control rule clear: sensitive production upload stays blocked until the real private backend, storage, database, secrets, backup, audit log, CORS, and reviewer gates are configured.</p><p><a class="button" href="production-vault-gate.html">Production Vault Gate</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main><script>function baseUrl(){return (document.getElementById("base").value||localStorage.getItem("eons_backend_base")||"").replace(/\/$/,"")}function saveBase(){localStorage.setItem("eons_backend_base",baseUrl());document.getElementById("out").textContent="Saved backend URL locally: "+baseUrl()}async function call(path,opt){const b=baseUrl();if(!b){document.getElementById("out").textContent="Paste backend URL first.";return}try{const r=await fetch(b+path,opt);const txt=await r.text();document.getElementById("out").textContent="HTTP "+r.status+"\n"+txt}catch(e){document.getElementById("out").textContent="Backend unavailable or CORS blocked. Sensitive upload remains blocked.\n\n"+e.message}}function checkGate(){call("/production-readiness")}function testUpload(){call("/sensitive-upload",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({test:"github-pages-gate-only-no-real-file"})})}</script></body></html>
