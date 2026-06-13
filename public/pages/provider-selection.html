@@ -1,0 +1,60 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Provider Selection</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">PROVIDER SELECTION PROMPT 2</p><h1>Supabase-first backend path</h1><p>GitHub Pages stays as the permanent free front-end. Supabase is selected as the first real backend candidate for auth, database, private storage, and row-level security planning. Sensitive production upload remains blocked until real credentials and security gates are configured.</p><div class="chips"><span>Frontend: GitHub Pages</span><span>Backend candidate: Supabase</span><span>Upload: Blocked</span></div></section><section class="card"><h2>Selected Path</h2><pre>Primary free/low-cost path:
+- Frontend/control UI: GitHub Pages
+- Backend candidate: Supabase
+- Auth candidate: Supabase Auth
+- Database candidate: Supabase Postgres
+- Private storage candidate: Supabase Storage private bucket
+- Secrets: Supabase dashboard + GitHub Actions secrets only
+- Audit log: Postgres audit_events table
+- Backup: Supabase export/backups later, plus encrypted archive plan
+- OCR/parser: disabled until secured backend route exists
+- Reviewer approval: reviewer workflow table + signed review packet later
+
+Production sensitive upload:
+BLOCKED until real Supabase project, RLS policies, private bucket, auth, service keys, CORS, audit logs, backup, and reviewer gate pass.</pre></section><section class="card"><h2>Why Not GitHub-Only?</h2><pre>GitHub Pages is excellent for:
+- static UI
+- public route map
+- proof reports
+- control center
+- non-sensitive docs
+
+GitHub Pages is not enough for:
+- private database
+- runtime secrets
+- server-side encryption
+- sensitive file vault
+- authenticated upload API
+- private audit log</pre></section><section class="card"><h2>Cloudflare Alternative</h2><pre>Cloudflare Workers + R2 can be used later for:
+- edge API
+- object storage
+- custom upload worker
+- R2 private bucket
+
+But it needs a database/auth pairing:
+- Supabase Postgres/Auth
+- Neon Postgres + auth provider
+- D1/KV only if the data model is simplified
+
+Recommended now:
+Use Supabase first because it combines auth, database, and storage in one setup path.</pre></section><section class="card"><h2>Supabase Setup Checklist</h2><label><input type="checkbox"> Create Supabase project</label><br><label><input type="checkbox"> Create private storage bucket: eons-evidence-vault</label><br><label><input type="checkbox"> Create tables: matter_files, evidence_records, upload_metadata, audit_events, reviewer_notes</label><br><label><input type="checkbox"> Enable Row Level Security on all sensitive tables</label><br><label><input type="checkbox"> Create owner/admin/reviewer/viewer role model</label><br><label><input type="checkbox"> Configure allowed frontend origin for GitHub Pages</label><br><label><input type="checkbox"> Store SUPABASE_URL in backend runtime secrets</label><br><label><input type="checkbox"> Store SUPABASE_SERVICE_ROLE_KEY in backend runtime secrets only</label><br><label><input type="checkbox"> Never expose service role key in GitHub Pages JavaScript</label><br><label><input type="checkbox"> Add audit log insert on upload/read/export/review actions</label><br><label><input type="checkbox"> Add backup/export plan</label><br><label><input type="checkbox"> Run private pilot with fake/test records only</label><br><label><input type="checkbox"> Security/professional review before sensitive production records</label><br><button onclick="saveChecklist()">Save checklist locally</button><pre id="checklistOut">Checklist is local browser memory only.</pre></section><section class="card"><h2>Required Secrets Later</h2><pre>Backend runtime secrets only:
+- SUPABASE_URL
+- SUPABASE_SERVICE_ROLE_KEY
+- SUPABASE_ANON_KEY if needed for client-safe public auth only
+- EONS_CORS_ORIGIN
+- EONS_OWNER_APPROVAL=true only after review
+- EONS_UPLOADS_ENABLED=true only after all gates pass
+
+Do not put secrets in:
+- Git
+- public/pages
+- docs
+- screenshots
+- ChatGPT messages
+- browser-visible JavaScript if sensitive</pre></section><section class="card"><h2>Production Gate Decision</h2><pre>DECISION: Supabase-first path selected for Provider Selection Prompt 2.
+
+DECISION: GitHub Pages remains permanent public/control layer.
+
+DECISION: Sensitive production upload remains blocked until Supabase project, auth, RLS, private storage, secrets, audit logging, backup, CORS, and reviewer approval are actually configured and tested.
+
+NEXT: generate Supabase SQL schema + RLS policy draft, but do not paste secrets or enable production upload yet.</pre></section><section class="card"><h2>Navigation</h2><p><a class="button" href="github-pages-compliance-center.html">GitHub Pages Compliance Center</a></p><p><a class="button" href="production-vault-gate.html">Production Vault Gate</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main><script>function saveChecklist(){const boxes=[...document.querySelectorAll('input[type=checkbox]')].map((b,i)=>({i,checked:b.checked,label:b.parentElement.textContent.trim()}));localStorage.setItem('eons_provider_selection_checklist',JSON.stringify(boxes));document.getElementById('checklistOut').textContent='Saved locally. This is not production approval.
+'+JSON.stringify(boxes,null,2)}document.addEventListener('DOMContentLoaded',()=>{try{const saved=JSON.parse(localStorage.getItem('eons_provider_selection_checklist')||'[]');saved.forEach(x=>{const b=document.querySelectorAll('input[type=checkbox]')[x.i];if(b)b.checked=x.checked})}catch(e){}})</script><script src="../assets/eons-field-instructions.js"></script></body></html>
