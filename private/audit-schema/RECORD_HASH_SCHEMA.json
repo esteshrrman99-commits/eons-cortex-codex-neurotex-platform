@@ -1,0 +1,13 @@
+{
+  "schema_name": "EONS_RECORD_HASH_SCHEMA",
+  "status": "browser_local_draft",
+  "fields": {
+    "record_id": "timestamped local record label",
+    "timestamp_utc": "ISO timestamp",
+    "page": "source page path",
+    "browser_sha256_hash": "hash of visible local packet text",
+    "chain_of_custody_note": "human-readable preservation note",
+    "review_status": "draft/review_required"
+  },
+  "boundary": "Not notarization, not official filing proof, not professional approval."
+}

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T13:59:22.574Z",
+  "generated_at": "2026-06-13T14:01:42.328Z",
   "mode": "private-review-static-pages",
   "rows": [
     {
@@ -8,11 +8,11 @@
     },
     {
       "file": "public/index.html",
-      "sha256": "fc232e2c8b88c0ca1b1e195d60586f3d2f0eb69cdf859a41f3742162852ef267"
+      "sha256": "7a7715d5323587514673109ec7df75b02e0d9ff29ee185d084e759d489ac5eac"
     },
     {
       "file": "public/assets/style.css",
-      "sha256": "df164ea228df8ef4239b0c7889c059aeefda5d1f505d3754ee58769ab27900b0"
+      "sha256": "947800c48a3c86703d2f9d27b02ea648cc89e78c519dbe9be7bb0a097d91c33a"
     },
     {
       "file": "public/assets/app.js",
@@ -20,7 +20,7 @@
     },
     {
       "file": "scripts/build.js",
-      "sha256": "dbecba9e911f3446078ce76821cc35c59bfecb56482ed46893e9655335047e13"
+      "sha256": "7a59a2f85cc7fa94d02f614bb6043b72ea7f85b3f1c8c6c859e9f7ebe52abfde"
     },
     {
       "file": "scripts/verify.js",

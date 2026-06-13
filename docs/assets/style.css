@@ -3,3 +3,5 @@
 .eons-upload-card input{margin:10px 0 14px}.mini{font-size:14px;opacity:.8}#eonsUploadOut{white-space:pre-wrap;background:#080d19;border-radius:18px;padding:18px;min-height:120px}
 
 .eons-field-help{margin:8px 0 16px;padding:12px 14px;border:1px solid #34405f;border-radius:14px;background:#0b1222;color:#dce4ff;font-size:14px;line-height:1.45}.eons-field-help:before{content:"How to use this: ";font-weight:800;color:#aab6ff}
+
+#eons-chain-panel pre{white-space:pre-wrap;background:#080d19;border-radius:18px;padding:18px;min-height:120px}
