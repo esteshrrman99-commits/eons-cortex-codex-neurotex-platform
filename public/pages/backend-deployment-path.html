@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Backend Deployment Path</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">SUPABASE PROMPT 8</p><h1>Backend deployment path selection</h1><p>Supabase-first is selected for the first private backend path, while GitHub Pages remains the permanent static front-end.</p><div class="chips"><span>Frontend: GitHub Pages</span><span>Backend: Supabase-first</span><span>Upload: Blocked</span></div></section><section class="card"><h2>Selected Path</h2><pre>1. GitHub Pages: permanent static front-end/control layer
+2. Supabase Edge Functions: first backend function candidate
+3. Supabase Postgres: private database candidate
+4. Supabase Storage: private bucket candidate
+5. Supabase Auth: auth candidate
+6. Supabase runtime secrets: not in Git</pre></section><section class="card"><h2>Provider Ranking</h2><pre>1. Supabase Edge Functions - first private pilot candidate
+2. Render - Node backend fallback
+3. Cloudflare Workers + R2 - later edge/storage add-on
+4. Railway - review subscription/usage before choosing
+5. Fly.io - cost-managed deployment, not guaranteed free forever</pre></section><section class="card"><h2>Still Blocked</h2><pre>- real sensitive upload
+- production upload enabled
+- service role key in browser/public files
+- final reviewer approval
+- production mode
+- real records before fake-record pilot passes</pre></section><section class="card"><h2>Next</h2><p>Next step is Supabase Prompt 9: Supabase Edge Function scaffold notes and function route map, with no secrets committed.</p><p><a class="button" href="deployment-smoke-test.html">Deployment Smoke Test</a></p><p><a class="button" href="supabase-deployment-checklist.html">Deployment Checklist</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main></body></html>
