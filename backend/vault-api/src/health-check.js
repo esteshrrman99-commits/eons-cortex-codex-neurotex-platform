@@ -1,0 +1,1 @@
+const http=require('http');const opts={hostname:'127.0.0.1',port:process.env.EONS_VAULT_PORT||8787,path:'/health',method:'GET'};const req=http.request(opts,res=>{let d='';res.on('data',c=>d+=c);res.on('end',()=>{console.log(d);process.exit(res.statusCode===200?0:1);});});req.on('error',e=>{console.error('Health check failed:',e.message);process.exit(1);});req.end();

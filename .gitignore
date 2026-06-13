@@ -14,3 +14,12 @@ backend/vault-api/audit/*.jsonl
 *.key
 node_modules/
 .DS_Store
+.env
+backend/vault-api/.env
+backend/vault-api/audit/*.jsonl
+backend/vault-api/uploads/*
+backend/vault-api/uploads-placeholder/*
+*.pem
+*.key
+node_modules/
+.DS_Store
