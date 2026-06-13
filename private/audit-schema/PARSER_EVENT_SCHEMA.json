@@ -1,0 +1,17 @@
+{
+  "schema_name": "EONS_PARSER_EVENT_SCHEMA",
+  "status": "draft_disabled",
+  "fields": {
+    "parse_id": "uuid",
+    "timestamp_utc": "ISO timestamp",
+    "upload_id": "linked upload metadata id",
+    "record_id": "linked evidence record id",
+    "filename": "source filename",
+    "file_type": "detected type",
+    "confidence_score": "0-100 future score",
+    "action": "parse_requested/parse_completed/parse_failed/owner_verified/reviewer_verified",
+    "result": "blocked/success/failure/review_required",
+    "notes": "audit note"
+  },
+  "boundary": "Parser service is disabled until production security review."
+}
