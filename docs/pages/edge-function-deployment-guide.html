@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Edge Function Deployment Guide</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">SUPABASE PROMPT 10</p><h1>Edge Function deployment guide</h1><p>Manual and CLI deployment notes for Supabase Edge Functions without committing secrets or enabling sensitive upload.</p><div class="chips"><span>Deploy: Manual/CLI Guide</span><span>Secrets: Runtime Only</span><span>Upload: Blocked</span></div></section><section class="card"><h2>Deployment Order</h2><pre>1. health
+2. production-readiness
+3. supabase-config-safe
+4. audit-event-create placeholder
+5. evidence-create fake-only
+6. upload-metadata-create fake-only
+7. reviewer-status-update placeholder
+8. sensitive-upload blocked route</pre></section><section class="card"><h2>CLI Placeholder Flow</h2><pre>supabase login
+supabase link --project-ref YOUR_PROJECT_REF
+supabase functions deploy health
+supabase functions deploy production-readiness
+supabase functions deploy supabase-config-safe
+
+Set secrets only in Supabase secret manager:
+supabase secrets set SUPABASE_URL=YOUR_VALUE
+supabase secrets set SUPABASE_SERVICE_ROLE_KEY=YOUR_VALUE
+supabase secrets set EONS_CORS_ORIGIN=https://esteshrrman99-commits.github.io</pre></section><section class="card"><h2>Boundary</h2><pre>Do not commit:
+- access tokens
+- service role keys
+- .env files
+- sensitive evidence
+- private upload files
+
+Sensitive upload remains blocked until all real gates pass.</pre></section><section class="card"><h2>Next</h2><p>Next step is Supabase Prompt 11: placeholder Edge Function folders/files for health and blocked sensitive-upload only, no secrets.</p><p><a class="button" href="edge-function-route-map.html">Edge Function Route Map</a></p><p><a class="button" href="backend-deployment-path.html">Backend Deployment Path</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main></body></html>
