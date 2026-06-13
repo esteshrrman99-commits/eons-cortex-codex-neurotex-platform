@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Deployment Smoke Test</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">SUPABASE PROMPT 7</p><h1>Deployment smoke-test checklist</h1><p>Verify no secrets are in Git and all sensitive upload gates remain blocked until runtime secrets are configured.</p><div class="chips"><span>Secrets: Scan Required</span><span>Upload: Blocked</span><span>Pilot: Fake Only</span></div></section><section class="card"><h2>Smoke-Test Checklist</h2><pre>[ ] git status is clean except expected reports
+[ ] .gitignore blocks .env files
+[ ] no service role key value appears in Git
+[ ] no database password appears in Git
+[ ] no production evidence files appear in Git
+[ ] no private uploads appear in Git
+[ ] GitHub Pages still builds
+[ ] docs/pages exist
+[ ] /production-readiness exists in backend scaffold
+[ ] /supabase-config exists in backend scaffold
+[ ] /sensitive-upload remains blocked without runtime gates
+[ ] /supabase-action-mock returns placeholder-only result
+[ ] private pilot uses fake records only
+[ ] reviewer status remains review_required</pre></section><section class="card"><h2>Pass / Fail</h2><pre>PASS:
+No secrets in Git, GitHub Pages builds, runtime gates are blocked, fake-record pilot only.
+
+FAIL:
+Any real secret, private evidence, production upload, or sensitive data appears in Git, public, docs, reports, screenshots, or chat.</pre></section><section class="card"><h2>Local Command</h2><pre>node scripts/eons-secret-smoke-scan.js</pre></section><section class="card"><h2>Next</h2><p>Next step is Supabase Prompt 8: choose private backend deployment path with free/low-cost notes.</p><p><a class="button" href="env-secret-protection.html">Environment Secret Protection</a></p><p><a class="button" href="supabase-deployment-checklist.html">Deployment Checklist</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main></body></html>
