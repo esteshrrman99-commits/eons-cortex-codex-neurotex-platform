@@ -1,0 +1,38 @@
+Starting EONS local mock vault API test on port 8787
+EONS vault-api local mock running on port 8787
+HEALTH_STATUS=200
+{
+  "status": "ok",
+  "service": "EONS vault-api",
+  "mode": "local_mock",
+  "uploads_enabled": false,
+  "encryption_enabled": false,
+  "auth_enabled": false,
+  "ocr_enabled": false,
+  "external_submissions": false
+}
+GATE_STATUS=200
+{
+  "production_gate": "BLOCKED",
+  "required": [
+    "authentication",
+    "encrypted storage",
+    "private database",
+    "OCR/parser",
+    "audit log backend",
+    "backup plan",
+    "security review",
+    "professional review workflow"
+  ],
+  "external_submissions": false
+}
+AUDIT_STATUS=200
+{
+  "audit_id": "3306a196-6574-4bf8-9f59-3be48cef53ec",
+  "timestamp_utc": "2026-06-13T14:22:40.218Z",
+  "action": "audit-demo",
+  "mode": "local_mock",
+  "external_action": false,
+  "note": "Local mock audit event only."
+}
+EONS_VAULT_API_TEST_PASS
