@@ -1,0 +1,14 @@
+EONS FINAL STAGING CHECKPOINT
+timestamp_utc=20260613-032431
+repo=eons-cortex-codex-neurotex-platform
+branch=main
+pages_source=/docs
+main_url=https://esteshrrman99-commits.github.io/eons-cortex-codex-neurotex-platform/
+family_url=https://esteshrrman99-commits.github.io/eons-cortex-codex-neurotex-platform/pages/family-preview.html
+domain_status=not connected yet
+external_actions=disabled
+live_filings=disabled
+billing=disabled
+sensitive_uploads=blocked until auth/encrypted storage
+professional_review_required=true
+status=permanent GitHub Pages staging complete
