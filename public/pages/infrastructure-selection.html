@@ -1,0 +1,81 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Infrastructure Selection</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">INFRASTRUCTURE SELECTION</p><h1>Free-first production path, safely gated</h1><p>This page chooses the lowest-cost path for staging now and records what must be selected before real encrypted-vault production upload is allowed.</p><div class="chips"><span>Public stage: GitHub Pages</span><span>Backend: Mock/local</span><span>Production upload: Blocked</span></div></section><section class="card"><h2>Recommended Free-First Stack</h2><pre>Public website/staging:
+- GitHub Pages from /docs
+- Custom domain later
+
+Backend host:
+- Keep local mock now
+- Candidate later: Cloudflare Workers free tier or another free serverless host
+
+Database:
+- Candidate later: Supabase Free Postgres or another free Postgres provider
+- Do not store sensitive production evidence yet
+
+Encrypted file storage:
+- Candidate later: Cloudflare R2 free tier or Supabase Storage free tier
+- Do not upload sensitive production records yet
+
+Secrets manager:
+- GitHub Secrets for deployment secrets only
+- Provider dashboard secrets for backend runtime
+- Never commit secrets to Git
+
+Auth provider:
+- Candidate later: Supabase Auth / Clerk / Auth0 free starter
+- Real login must exist before sensitive records
+
+OCR/parser:
+- Local/manual first
+- Candidate later: free/open-source parser pipeline
+- Paid OCR may be needed for real reliability
+
+Backup storage:
+- Versioned encrypted object storage later
+- Current backup is Git evidence reports only, no sensitive files
+
+Deployment path:
+1. GitHub Pages remains permanent public stage
+2. Local mock backend stays safe
+3. Select free backend/database/storage
+4. Add secrets in provider, not Git
+5. Turn on private test environment
+6. Security/professional review
+7. Only then consider sensitive production upload</pre></section><section class="card"><h2>Decision</h2><pre>DECISION: GitHub Pages remains the permanent free public staging host.
+
+DECISION: Backend/encrypted vault remains local mock until real provider is selected.
+
+DECISION: No sensitive tax, bank, identity, health, family, legal, or production evidence files should be uploaded to a public/static site.
+
+DECISION: Free-tier infrastructure is acceptable for prototype/staging, not automatically acceptable for compliance production.</pre></section><section class="card"><h2>Provider Comparison</h2><pre>GitHub only:
++ Free permanent static Pages
++ Great for docs, UI, proof reports, public staging
+- No real backend database
+- No private encrypted file vault on Pages
+
+Cloudflare path:
++ Workers can host backend functions
++ R2 can store files
++ Strong edge deployment
+- Requires account setup, secrets, access controls, security design
+
+Supabase path:
++ Postgres database
++ Auth
++ Storage
++ Good app backend starter
+- Free tier has limits
+- Production compliance still requires review and security hardening
+
+Manual/local path:
++ Safest now
++ No sensitive data leaves your machine/browser
+- Not production automation yet</pre></section><section class="card"><h2>Production Gate</h2><pre>BLOCKED until:
+- backend host selected
+- private database selected
+- encrypted storage selected
+- auth selected
+- secrets manager configured
+- OCR/parser selected
+- backup/restore plan selected
+- privacy/security review complete
+- professional workflow review complete
+- owner approves live production mode</pre></section><section class="card"><h2>Next Build Step</h2><p>Next prompt should create a provider decision matrix and keep GitHub Pages as the public stage while preparing Cloudflare/Supabase options without enabling sensitive uploads.</p><p><a class="button" href="backend-phase-index.html">Backend Phase Index</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main><script src="../assets/eons-field-instructions.js"></script></body></html>
