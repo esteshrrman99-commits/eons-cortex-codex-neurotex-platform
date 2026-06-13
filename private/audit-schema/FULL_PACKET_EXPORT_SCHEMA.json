@@ -1,0 +1,14 @@
+{
+  "schema_name": "EONS_FULL_PACKET_EXPORT_SCHEMA",
+  "status": "browser_local_draft",
+  "sections": [
+    "field_owner_note_summary",
+    "local_upload_history",
+    "record_id_hash_history",
+    "missing_proof_checklist",
+    "checklist_output_areas",
+    "professional_review_status",
+    "chain_of_custody_note"
+  ],
+  "boundary": "Local draft export only; professional review required."
+}

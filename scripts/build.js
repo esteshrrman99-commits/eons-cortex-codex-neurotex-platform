@@ -20,4 +20,4 @@ function inject(dir){
 inject('docs');
 fs.writeFileSync('docs/.nojekyll','');
 fs.writeFileSync('docs/robots.txt','User-agent: *\nDisallow: /\n');
-console.log('Built docs/ with upload, instructions, and record hash layer.');
+console.log('Built docs/ with upload, instructions, record hash, and full packet export layer.');
