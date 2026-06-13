@@ -1,0 +1,15 @@
+{
+  "schema_name": "EONS_REVIEW_EVENT_SCHEMA",
+  "status": "draft_disabled",
+  "fields": {
+    "review_id": "uuid",
+    "timestamp_utc": "ISO timestamp",
+    "matter_id": "linked matter id",
+    "record_id": "linked evidence record id",
+    "reviewer_type": "CPA/EA/tax_attorney/bookkeeper/owner_pre_review",
+    "review_status": "draft/review_required/missing_proof/professionally_reviewed/rejected/closed",
+    "final_approval": "false until production signoff workflow exists",
+    "notes": "reviewer notes"
+  },
+  "boundary": "Review workflow scaffold does not create final signoff."
+}
