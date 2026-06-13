@@ -1,0 +1,14 @@
+{
+  "schema_name": "EONS_DATABASE_EVENT_SCHEMA",
+  "status": "draft_only",
+  "events": [
+    "migration_created",
+    "migration_applied",
+    "record_created",
+    "record_updated",
+    "record_deleted",
+    "review_note_added",
+    "export_created"
+  ],
+  "boundary": "Database event logging is schema-only until production backend exists."
+}

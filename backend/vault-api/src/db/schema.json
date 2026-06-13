@@ -1,0 +1,62 @@
+{
+  "schema_name": "EONS_PRIVATE_DATABASE_SCHEMA",
+  "status": "draft_scaffold_only",
+  "production_database_enabled": false,
+  "tables": {
+    "evidence_records": {
+      "record_id": "uuid primary key",
+      "matter_id": "linked matter id",
+      "title": "short record title",
+      "entity_or_person": "entity/person",
+      "tax_year_or_period": "year or period",
+      "evidence_tier": "tier 1-7",
+      "record_type": "receipt/invoice/bank/proof/review/etc",
+      "source_status": "uploaded/local/manual/missing",
+      "review_status": "draft/review_required/approved/rejected",
+      "created_at_utc": "timestamp",
+      "updated_at_utc": "timestamp"
+    },
+    "matter_files": {
+      "matter_id": "uuid primary key",
+      "matter_name": "matter title",
+      "entity_or_person": "entity/person",
+      "tax_year_or_period": "year or period",
+      "issue_type": "category",
+      "reviewer": "CPA/EA/tax attorney/bookkeeper/owner",
+      "deadline": "date",
+      "status": "draft/evidence_needed/ready_for_review/blocked/closed",
+      "created_at_utc": "timestamp"
+    },
+    "upload_metadata": {
+      "upload_id": "uuid primary key",
+      "record_id": "linked evidence record id",
+      "filename": "original filename",
+      "mime_type": "file type",
+      "size_bytes": "number",
+      "storage_status": "mock/blocked/encrypted_future",
+      "file_hash": "future hash",
+      "created_at_utc": "timestamp"
+    },
+    "audit_events": {
+      "audit_id": "uuid primary key",
+      "timestamp_utc": "timestamp",
+      "actor_id": "future user id",
+      "actor_role": "owner/admin/reviewer/viewer/system",
+      "action_type": "create/update/upload/read/export/review/delete",
+      "resource_type": "record/matter/file/review/export/auth",
+      "resource_id": "linked id",
+      "result": "success/blocked/failure",
+      "notes": "event notes"
+    },
+    "reviewer_notes": {
+      "note_id": "uuid primary key",
+      "record_id": "linked record id",
+      "matter_id": "linked matter id",
+      "reviewer_role": "CPA/EA/tax attorney/bookkeeper/owner",
+      "note_text": "review comment",
+      "status": "question/needs_evidence/reviewed/rejected/approved_with_signoff",
+      "created_at_utc": "timestamp"
+    }
+  },
+  "boundary": "Schema draft only. No production database is enabled."
+}
