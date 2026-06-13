@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Supabase Setup Guide</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">SUPABASE PROMPT 3</p><h1>Project setup guide and SQL checklist</h1><p>This page explains how to create the Supabase project, run the draft SQL, create the private bucket, and keep secrets out of Git and chat.</p><div class="chips"><span>Secrets: Outside Git</span><span>SQL: Draft Review</span><span>Upload: Still Blocked</span></div></section><section class="card"><h2>Setup Steps</h2><pre>1. Create Supabase project in the Supabase dashboard.
+2. Open SQL Editor.
+3. Review and run supabase/sql/001_eons_schema_draft.sql.
+4. Confirm tables exist.
+5. Review RLS draft before relying on it.
+6. Create private bucket: eons-evidence-vault.
+7. Keep service role key out of GitHub Pages, Git, docs, screenshots, and chat.
+8. Add secrets only to the private backend runtime environment later.
+9. Test with fake records only.
+10. Keep sensitive production upload blocked until security and professional review.</pre></section><section class="card"><h2>Tables</h2><pre>matter_files
+evidence_records
+upload_metadata
+audit_events
+reviewer_notes</pre></section><section class="card"><h2>Private Bucket</h2><pre>Bucket: eons-evidence-vault
+Public access: off
+Public URLs: disabled for sensitive evidence
+Uploads: backend only after auth, encryption, audit log, CORS, backup, and reviewer gates pass</pre></section><section class="card"><h2>Secret Boundary</h2><pre>Never expose:
+- SUPABASE_SERVICE_ROLE_KEY
+- database password
+- JWT secret
+- storage signing secrets
+- backup credentials
+
+Allowed later only in backend runtime secrets:
+- SUPABASE_URL
+- SUPABASE_SERVICE_ROLE_KEY
+- EONS_CORS_ORIGIN</pre></section><section class="card"><h2>Next</h2><p>Next step is Supabase Prompt 4: private pilot test plan with fake records only.</p><p><a class="button" href="supabase-schema.html">Supabase Schema Draft</a></p><p><a class="button" href="supabase-adapter.html">Supabase Adapter</a></p><p><a class="button" href="provider-selection.html">Provider Selection</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main></body></html>
