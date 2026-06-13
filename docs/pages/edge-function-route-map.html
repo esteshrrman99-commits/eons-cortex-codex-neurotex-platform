@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Edge Function Route Map</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">SUPABASE PROMPT 9</p><h1>Edge Function scaffold route map</h1><p>Future Supabase Edge Function routes are mapped without committing secrets or enabling sensitive uploads.</p><div class="chips"><span>Functions: Scaffold</span><span>Secrets: Runtime Only</span><span>Upload: Blocked</span></div></section><section class="card"><h2>Route Map</h2><pre>GET /functions/v1/health
+GET /functions/v1/production-readiness
+GET /functions/v1/supabase-config-safe
+POST /functions/v1/evidence-create
+POST /functions/v1/upload-metadata-create
+POST /functions/v1/audit-event-create
+POST /functions/v1/reviewer-status-update
+POST /functions/v1/sensitive-upload</pre></section><section class="card"><h2>Default Behavior</h2><pre>health: safe status only
+production-readiness: gate status only
+supabase-config-safe: present/missing only, no secret values
+evidence-create: fake/pilot only until review
+upload-metadata-create: fake/pilot only until review
+audit-event-create: append-only later
+reviewer-status-update: reviewer workflow later
+sensitive-upload: blocked by default</pre></section><section class="card"><h2>Security Boundary</h2><pre>No service role key in Git.
+No service role key in GitHub Pages JavaScript.
+No sensitive files in public/docs/reports.
+Functions must require auth before real records.
+Functions must write audit events.
+Sensitive upload remains blocked until all gates pass.</pre></section><section class="card"><h2>Next</h2><p>Next step is Supabase Prompt 10: CLI/manual deployment guide for Edge Functions without adding secrets.</p><p><a class="button" href="backend-deployment-path.html">Backend Deployment Path</a></p><p><a class="button" href="deployment-smoke-test.html">Deployment Smoke Test</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main></body></html>
