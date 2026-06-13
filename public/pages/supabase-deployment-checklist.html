@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Private Backend Deployment</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">SUPABASE PROMPT 5</p><h1>Private backend deployment checklist</h1><p>Prepare the real backend deployment path while keeping secrets outside Git and keeping sensitive production upload blocked.</p><div class="chips"><span>Frontend: GitHub Pages</span><span>Backend: Separate private service</span><span>Secrets: Runtime only</span></div></section><section class="card"><h2>Deployment Rule</h2><pre>GitHub Pages stays static.
+Backend deploys separately.
+Secrets go only in backend runtime settings.
+Do not paste keys into Git, docs, screenshots, or chat.
+Sensitive upload stays blocked until the real gate passes.</pre></section><section class="card"><h2>Backend Host Candidates</h2><pre>- Render free/low-cost web service
+- Fly.io app
+- Railway app
+- Supabase Edge Functions later
+- Cloudflare Workers later if adapter is converted</pre></section><section class="card"><h2>Required Runtime Variables Later</h2><pre>SUPABASE_URL
+SUPABASE_SERVICE_ROLE_KEY
+EONS_CORS_ORIGIN=https://esteshrrman99-commits.github.io
+EONS_PRODUCTION_MODE=true only after review
+EONS_AUTH_ENABLED=true only after auth works
+EONS_ENCRYPTION_ENABLED=true only after encryption works
+EONS_UPLOADS_ENABLED=true only after all gates pass
+EONS_REVIEW_ENABLED=true only after reviewer workflow works
+EONS_OWNER_APPROVAL=true only after owner signs off</pre></section><section class="card"><h2>Deploy Checklist</h2><pre>[ ] Choose backend host
+[ ] Create backend app/service
+[ ] Add runtime secrets in provider dashboard only
+[ ] Confirm .env is not committed
+[ ] Confirm service role key is not in GitHub Pages JavaScript
+[ ] Configure CORS to approved GitHub Pages origin only
+[ ] Start backend service
+[ ] Test /health
+[ ] Test /gate
+[ ] Test /production-readiness
+[ ] Test /supabase-config
+[ ] Confirm sensitive upload remains blocked
+[ ] Test fake records only
+[ ] Confirm audit event placeholder works
+[ ] Confirm reviewer gate remains review_required
+[ ] Complete security review before real sensitive upload</pre></section><section class="card"><h2>Next</h2><p>Next step is Supabase Prompt 6: deployment environment templates with placeholder names only and .gitignore protection.</p><p><a class="button" href="supabase-private-pilot.html">Supabase Private Pilot</a></p><p><a class="button" href="supabase-setup-guide.html">Supabase Setup Guide</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main></body></html>
