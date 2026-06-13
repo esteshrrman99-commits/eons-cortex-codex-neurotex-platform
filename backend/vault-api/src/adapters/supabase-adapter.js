@@ -1,0 +1,7 @@
+function supabaseConfigStatus(){const required=["SUPABASE_URL","SUPABASE_SERVICE_ROLE_KEY","EONS_CORS_ORIGIN"];const missing=required.filter(k=>String(process.env[k]||"").trim().length===0);return {adapter:"supabase",configured:missing.length===0,missing,warning:missing.length===0?"Runtime variables present. Still verify RLS, private bucket, audit logs, and security review.":"Supabase adapter blocked until runtime secrets are configured outside Git."};}
+function blocked(action){return {ok:false,action,mode:"adapter_placeholder_only",status:"BLOCKED_UNTIL_SUPABASE_RUNTIME_SECRETS_AND_SECURITY_REVIEW",config:supabaseConfigStatus(),note:"No secret is stored in Git. No sensitive file or record is written by this placeholder."};}
+async function createEvidenceRecord(){return blocked("create_evidence_record");}
+async function uploadEncryptedObject(){return blocked("upload_encrypted_object");}
+async function insertAuditEvent(){return {...blocked("insert_audit_event"),mock_audit_id:require("crypto").randomUUID(),timestamp_utc:new Date().toISOString()};}
+async function updateReviewStatus(){return blocked("update_review_status");}
+module.exports={supabaseConfigStatus,createEvidenceRecord,uploadEncryptedObject,insertAuditEvent,updateReviewStatus};
