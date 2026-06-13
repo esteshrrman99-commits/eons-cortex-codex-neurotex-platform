@@ -1,0 +1,14 @@
+{
+  "schema_name": "EONS_AUTH_EVENT_SCHEMA",
+  "status": "draft_disabled",
+  "fields": {
+    "event_id": "uuid",
+    "timestamp_utc": "ISO timestamp",
+    "actor_id": "future user id",
+    "role": "owner/admin/reviewer/viewer",
+    "action": "login/logout/session_expire/access_denied/role_change",
+    "result": "blocked/success/failure",
+    "notes": "audit note"
+  },
+  "boundary": "Auth service is disabled until production security review."
+}
