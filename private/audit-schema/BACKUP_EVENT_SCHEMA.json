@@ -1,0 +1,14 @@
+{
+  "schema_name": "EONS_BACKUP_EVENT_SCHEMA",
+  "status": "draft_disabled",
+  "events": [
+    "backup_requested",
+    "backup_manifest_created",
+    "backup_completed",
+    "restore_requested",
+    "restore_completed",
+    "restore_failed",
+    "archive_hash_verified"
+  ],
+  "boundary": "Backup/restore is scaffold-only until encrypted production storage exists."
+}
