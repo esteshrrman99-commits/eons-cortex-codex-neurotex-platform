@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EONS Edge Function Placeholders</title><link rel="stylesheet" href="../assets/style.css"></head><body><main class="wrap"><section class="hero"><p class="eyebrow">SUPABASE PROMPT 11</p><h1>Edge Function placeholders</h1><p>Safe placeholder files for health, production-readiness, and blocked sensitive-upload. No secrets are committed.</p><div class="chips"><span>Health: Safe</span><span>Readiness: Gate Status</span><span>Sensitive Upload: 403 Blocked</span></div></section><section class="card"><h2>Created Functions</h2><pre>supabase/functions/health/index.ts
+supabase/functions/production-readiness/index.ts
+supabase/functions/sensitive-upload/index.ts</pre></section><section class="card"><h2>Behavior</h2><pre>health:
+Returns safe placeholder OK.
+
+production-readiness:
+Returns configured/missing gate status without secret values.
+
+sensitive-upload:
+Always returns HTTP 403 blocked until all production gates pass.</pre></section><section class="card"><h2>Security Boundary</h2><pre>No service role key.
+No access token.
+No database password.
+No private evidence.
+No production upload logic.
+No sensitive files in Git.</pre></section><section class="card"><h2>Next</h2><p>Next step is Supabase Prompt 12: final Supabase phase checkpoint with route index, file registry, remaining manual steps, and production gate summary.</p><p><a class="button" href="edge-function-deployment-guide.html">Deployment Guide</a></p><p><a class="button" href="edge-function-route-map.html">Route Map</a></p><p><a class="button" href="master-control-center.html">Master Control Center</a></p></section></main></body></html>
