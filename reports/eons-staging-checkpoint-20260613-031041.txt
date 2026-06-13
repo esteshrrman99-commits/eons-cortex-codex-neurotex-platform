@@ -1,0 +1,9 @@
+EONS permanent staging checkpoint
+timestamp_utc=20260613-031041
+repo=eons-cortex-codex-neurotex-platform
+pages_url=https://esteshrrman99-commits.github.io/eons-cortex-codex-neurotex-platform/
+branch=main
+pages_source=/docs
+status=owner-reviewed staging shell
+live_external_actions=disabled
+professional_review_required=true
