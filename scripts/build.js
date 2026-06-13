@@ -9,8 +9,10 @@ function inject(dir){
     if(st.isDirectory()) inject(p);
     if(st.isFile() && p.endsWith('.html')){
       let s=fs.readFileSync(p,'utf8');
-        const rel=p.includes('/pages/')?'../assets/eons-upload-intake.js':'assets/eons-upload-intake.js';
-        s=s.replace('</body>','<script src="'+rel+'"></script></body>');
+      const scripts=[];
+      if(scripts.length){
+        const tags=scripts.map(x=>'<script src="'+x+'"></script>').join('');
+        s=s.replace('</body>',tags+'</body>');
         fs.writeFileSync(p,s);
       }
     }
@@ -19,4 +21,4 @@ function inject(dir){
 inject('docs');
 fs.writeFileSync('docs/.nojekyll','');
 fs.writeFileSync('docs/robots.txt','User-agent: *\nDisallow: /\n');
-console.log('Built docs/ for GitHub Pages with universal upload import.');
+console.log('Built docs/ with upload layer and simple field instructions.');
