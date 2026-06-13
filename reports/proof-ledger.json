@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-06-13T02:50:54.968Z",
+  "mode": "private-review-static-pages",
+  "rows": [
+    {
+      "file": "README.md",
+      "sha256": "1618bba7a2e3d70711e89525dfaf233bc9d55fe2420fd0bd38e2d5f02d862e59"
+    },
+    {
+      "file": "public/index.html",
+      "sha256": "fa254d442e6ad0cf205eb5e7c07f2ad4b7f4840dc9fbcfefbdc869fc2fafb2a2"
+    },
+    {
+      "file": "public/assets/style.css",
+      "sha256": "57297b703df5117cbeb3a5a78e088635f741fa5ba67ca6b075102334ef779b4b"
+    },
+    {
+      "file": "public/assets/app.js",
+      "sha256": "d730c862276a404f9dc815dce82413696827ce34d87a264945bd3929f9ab79a1"
+    },
+    {
+      "file": "scripts/build.js",
+      "sha256": "a964ebc5b72161ec82da5c8f1b97400a6289dfd3f487cfc3ecc7a339c2f08949"
+    },
+    {
+      "file": "scripts/verify.js",
+      "sha256": "212492d69fc95e248a36b3c121a723ca84359b3563644ba86d133a19dcfe0c72"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+.env
+*.pem
+*.key
+node_modules/
+private/source-packs/*.zip
+.DS_Store

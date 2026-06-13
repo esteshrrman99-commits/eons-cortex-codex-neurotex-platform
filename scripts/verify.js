@@ -1,0 +1,1 @@
+const fs=require('fs');let ok=true;for(const f of ['docs/index.html','docs/assets/style.css','docs/assets/app.js','docs/.nojekyll','docs/robots.txt']){if(!fs.existsSync(f)){console.log('MISSING',f);ok=false}else console.log('OK',f)}process.exit(ok?0:1);
