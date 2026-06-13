@@ -4,3 +4,13 @@
 node_modules/
 private/source-packs/*.zip
 .DS_Store
+.env
+backend/vault-api/.env
+backend/vault-api/data/*.db
+backend/vault-api/uploads/*
+backend/vault-api/uploads-placeholder/*
+backend/vault-api/audit/*.jsonl
+*.pem
+*.key
+node_modules/
+.DS_Store
