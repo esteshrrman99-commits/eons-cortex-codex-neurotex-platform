@@ -1,0 +1,15 @@
+{
+  "schema_name": "EONS_ENCRYPTION_EVENT_SCHEMA",
+  "status": "draft_disabled",
+  "fields": {
+    "event_id": "uuid",
+    "timestamp_utc": "ISO timestamp",
+    "record_id": "linked evidence record",
+    "action": "encrypt/decrypt/key_rotate/key_revoke",
+    "actor_id": "owner/reviewer/system",
+    "key_version": "future key version id",
+    "result": "blocked/success/failure",
+    "notes": "audit note"
+  },
+  "boundary": "Encryption service is disabled until production security review."
+}
