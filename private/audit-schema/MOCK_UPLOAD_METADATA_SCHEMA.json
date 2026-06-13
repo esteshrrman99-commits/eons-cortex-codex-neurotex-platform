@@ -1,0 +1,1 @@
+{"schema_name":"EONS_MOCK_UPLOAD_METADATA_SCHEMA","status":"metadata_only_mock","fields":{"record_id":"uuid","timestamp_utc":"ISO timestamp","filename":"file name only","filetype":"mime type","size_bytes":"number","owner_note":"draft note","status":"metadata_record_only_review_required"},"boundary":"No real file storage. Production uploads blocked."}

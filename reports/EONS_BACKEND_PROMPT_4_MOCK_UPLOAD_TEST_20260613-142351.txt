@@ -1,0 +1,13 @@
+UPLOAD_MOCK_STATUS=200
+{
+  "record_id": "dd76857a-7e4a-44e4-ba54-ef505675b4e5",
+  "timestamp_utc": "2026-06-13T14:23:54.680Z",
+  "mode": "local_mock_metadata_only",
+  "uploads_enabled": false,
+  "production_storage": false,
+  "filename": "sample-evidence.pdf",
+  "filetype": "application/pdf",
+  "size_bytes": 12345,
+  "owner_note": "mock metadata test only",
+  "status": "metadata_record_only_review_required"
+}
