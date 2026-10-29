@@ -47,3 +47,33 @@ button,.card a.button{background:linear-gradient(110deg,#9c7035,#f4d58b,#b7853d)
 .advanced-nav[open] .nav-links{padding:16px}
 pre{background:#080a10;color:#f2dfbb;border:1px solid #8c6a3844}
 @media(max-width:680px){.dashboard{grid-template-columns:1fr 1fr}.dashboard>div:last-child{grid-column:1/-1}.nav-links{grid-template-columns:1fr}.eons-top .top-link{display:none}.eons-identity small{font-size:8px}.hero{padding:25px}.card a.button{font-size:14px}}
+
+/* M13 — Render & Review: civic accountability / manuscript / indigo / copper */
+:root{--eons-ink:#090e1c;--eons-indigo:#182743;--eons-copper:#cb9970;--eons-paper:#eee6d8;--eons-muted:#bfc8d5;color:#f3eee5;background:var(--eons-ink)}
+body{background:radial-gradient(circle at 15% 0%,#2d3654 0%,#101727 40%,#080c15 100%);color:#f3eee5}
+.eons-top{border-color:#9facc64d}
+.eons-identity,.top-link{color:#e4d4bd}
+.eons-identity small{color:#c7d1dc}
+.eons-orb{border-color:#9eb2c5;background:radial-gradient(circle at 30% 25%,#d5e1eb,#4a7092 48%,#172d4d 80%);color:#fff;box-shadow:0 0 25px #739bc644}
+.hero,.panel,.notice,article,.card{background:linear-gradient(150deg,#19253a,#0e1523);border-color:#7c93ac60}
+.hero{position:relative;overflow:hidden;border-top:3px solid var(--eons-copper)}
+.hero:after{content:"";position:absolute;right:-50px;top:-70px;width:260px;height:260px;border:1px solid #d4b29322;border-radius:50%;pointer-events:none;box-shadow:0 0 0 32px #d4b2930a,0 0 0 68px #d4b29308}
+.eyebrow,.dashboard span{color:#d8b39a}
+h1 em{color:#d7ae91}h2,.dashboard strong{color:#e8d8c6}
+.status span{background:#111d31;color:#e7d9c7;border-color:#8b9db06e}
+.dashboard>div{background:#131e31;border-color:#8b9db06e}
+button,.card a.button{background:linear-gradient(110deg,#a0b5c9,#e7e0d3,#cb9970);border-color:#c4c9cc;color:#101827}
+.advanced-nav,.advanced-nav summary{border-color:#8399ad66}
+.advanced-nav summary{background:#17233a;color:#e8d8c6}
+.scripture-banner{display:grid;grid-template-columns:90px 1fr;gap:22px;margin:22px 0;padding:clamp(22px,4vw,44px);border:1px solid #bb977a88;border-left:5px solid var(--eons-copper);border-radius:20px;background:linear-gradient(120deg,#24314b,#151b2d)}
+.scripture-mark{width:76px;height:76px;border-radius:50%;border:1px solid #c8a78a;display:grid;place-items:center;font-size:39px;color:#e2c8a8}
+.scripture-banner h2{margin:0 0 16px;font-size:clamp(1.7rem,3vw,2.6rem)}
+.scripture-banner blockquote{font:italic clamp(1.25rem,2.5vw,1.85rem)/1.55 Georgia,serif;color:#f0e3cf;margin:0 0 12px}
+.scripture-ref{color:#d6b69b;font-size:13px;letter-spacing:.03em}
+.scripture-banner p:last-child{line-height:1.6;color:#d2d8e1}
+.mission-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:22px}
+.mission-grid article{padding:24px}
+.mission-grid h2{margin:12px 0}
+.mission-grid p{color:#c9d1df;line-height:1.6}
+.mission-index{font-size:11px;letter-spacing:.15em;color:#d4b39b;font-weight:800}
+@media(max-width:720px){.mission-grid{grid-template-columns:1fr}.scripture-banner{grid-template-columns:1fr}.scripture-mark{width:60px;height:60px;font-size:29px}}
