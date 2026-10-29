@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>EONS | M18 Reconciliation Lab (Demo)</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,sans-serif;background:#080e1d;color:#edf8ff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 65% 12%,#2a4c74 0%,transparent 45%),radial-gradient(ellipse at 5% 90%,#38275c,transparent 48%),#080e1d}
+header,main,footer{max-width:1100px;margin:auto;padding:20px}
+nav{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+a{color:#b8f1ff}a:focus-visible,button:focus-visible{outline:3px solid #9befff;outline-offset:4px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#f6fdff;font-weight:850;letter-spacing:.1em}.brand .mark{display:grid;place-items:center;width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,#86e5ff,#8b6dff);box-shadow:0 0 25px #72ddff69;color:#071222;font-size:2rem}
+.badge{border:1px solid #e9beff8c;border-radius:99px;padding:8px 12px;color:#f7d8ff;background:#5e398d36;font-size:.8rem;font-weight:750}
+.hero,.card{border:1px solid #a9edff65;border-radius:28px;background:linear-gradient(135deg,#bfdfff20,#152440c9 55%,#382a5780);box-shadow:inset 0 1px 1px #fff6,0 24px 60px #0008,0 0 45px #64d9ff1c;backdrop-filter:blur(16px)}
+.hero{padding:clamp(24px,5vw,60px);margin:20px 0}.eyebrow{color:#9ae9ff;letter-spacing:.18em;font-size:.8rem;font-weight:800}
+h1{font-size:clamp(2.2rem,6vw,4.7rem);line-height:1.07;letter-spacing:-.045em;margin:.3em 0;background:linear-gradient(120deg,#fff,#a6eeff 55%,#ebc8ff);background-clip:text;color:transparent}
+p{line-height:1.65;color:#d2e3f4;max-width:68ch}.layout{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{padding:24px}h2{margin-top:0;font-size:1.25rem}
+button{font:inherit;cursor:pointer;font-weight:800;border:1px solid #d4f5ffab;border-radius:16px;color:#fff;background:linear-gradient(120deg,#5bbddf72,#8665c785);padding:14px 20px;box-shadow:inset 0 1px 1px #fff7,0 10px 25px #0008;min-height:48px}
+button:hover{box-shadow:0 0 30px #6fe5ff67}button+button{margin:8px 0 0 8px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.9rem;background:#070d1c;border:1px solid #b6dcff40;border-radius:18px;padding:18px;min-height:210px;color:#dcf5ff}
+.note{border-left:3px solid #e5c6ff;padding:10px 16px;background:#e0bfff0e;color:#e8dff6}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.card{padding:18px}button{width:100%}button+button{margin:10px 0 0}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style></head>
+<body><header><nav aria-label="Lab navigation"><a class="brand" href="/"><span class="mark" aria-hidden="true">✦</span>EONS / INTELLIGENCE FABRIC</a><span class="badge">M18 · DEMO / NO LIVE DATA</span></nav></header>
+<main><section class="hero"><div class="eyebrow">EVIDENCE-LED FINANCIAL INTELLIGENCE</div>
+<h1>Reconciliation.<br>Without guesswork.</h1>
+<p>Experience a conservative matching engine that uses integer cents, exact dates, transaction references, and one-to-one candidate rules. Ambiguity stays visible instead of being silently reconciled.</p>
+<p class="note"><strong>Demo only.</strong> All records below are synthetic. This page does not access bank accounts, accept uploads, calculate taxes, or certify any transaction.</p></section>
+<div class="layout"><section class="card"><h2>Controlled Simulation</h2><p>Run a sample containing a valid candidate match and duplicate-amount ambiguity. Compare what the engine can and cannot safely infer.</p>
+<button id="run" type="button">Run Sample Reconciliation ↗</button><button id="reset" type="button">Clear Results</button>
+<p><small>Matching output is provisional until source documents and reviewer sign-off are verified.</small></p></section>
+<section class="card"><h2>Evidence Console</h2><pre id="result" aria-live="polite" aria-label="Reconciliation results">Ready. No records processed.</pre></section></div>
+</main><footer><p>EONS M18 — evidence-first, review-gated engineering. No guaranteed refunds, filing, or IRS acceptance.</p></footer>
+<script src="/assets/m18-reconciliation.js"></script>
+<script>
+(function(){
+'use strict';
+const output=document.getElementById('result');
+document.getElementById('run').addEventListener('click',function(){
+try{
+const bank=[
+{id:'BANK-A',date:'2026-10-29',amount:'-42.17',reference:'INV-101',evidence_id:'DOC-B1'},
+{id:'BANK-B',date:'2026-10-29',amount:'-10.00'},
+{id:'BANK-C',date:'2026-10-29',amount:'-10.00'}];
+const ledger=[
+{id:'LEDGER-A',date:'2026-10-28',amount:'-42.17',reference:'INV-101',evidence_id:'DOC-L1'},
+{id:'LEDGER-B',date:'2026-10-29',amount:'-10.00'}];
+const r=window.EonsReconciliation.reconcile(bank,ledger);
+output.textContent=[
+'MODE: '+r.mode,'EXTERNALLY VERIFIED: NO','',
+'CANDIDATE MATCHES: '+r.counts.candidates,
+...r.matches.map(m=>'  '+m.bankId+' ↔ '+m.ledgerId+' / '+m.evidenceStatus),
+'AMBIGUOUS BANK IDS: '+(r.ambiguousBank.join(', ')||'none'),
+'AMBIGUOUS LEDGER IDS: '+(r.ambiguousLedger.join(', ')||'none'),
+'UNMATCHED BANK IDS: '+(r.unmatchedBank.join(', ')||'none'),
+'UNMATCHED LEDGER IDS: '+(r.unmatchedLedger.join(', ')||'none'),
+'','REVIEW REQUIRED: YES','AUTOMATIC POSTING: DISABLED'
+].join('\n');
+}catch(e){output.textContent='Cannot process sample: '+e.message;}
+});
+document.getElementById('reset').addEventListener('click',function(){output.textContent='Ready. No records processed.';});
+})();
+</script></body></html>
