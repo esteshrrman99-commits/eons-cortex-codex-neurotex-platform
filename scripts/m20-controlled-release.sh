@@ -50,7 +50,7 @@ rollback(){
   echo "M20_ROLLBACK=REMOVED_NEW_FILES"
 }
 while IFS= read -r line; do
-  rel="${line:72}" # remove hash + two spaces; starts docs/
+  rel="${line:66}" # remove 64 hex characters + two spaces
   rel="${rel#docs/}"
   test ! -e "$LIVE/$rel" || { echo "DENIED: existing file $rel"; rollback; exit 6; }
   mkdir -p "$(dirname "$LIVE/$rel")"
