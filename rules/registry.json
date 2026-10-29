@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "description": "No tax rules are enabled. All tax positions require source verification and qualified reviewer sign-off before release.",
+  "rules": []
+}
