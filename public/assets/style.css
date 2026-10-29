@@ -7,3 +7,43 @@
 #eons-chain-panel pre{white-space:pre-wrap;background:#080d19;border-radius:18px;padding:18px;min-height:120px}
 
 #eons-full-packet-panel pre{white-space:pre-wrap;background:#080d19;border-radius:18px;padding:18px;min-height:120px}
+
+/* EONS M5 - source-controlled responsive premium interface */
+:root{color-scheme:dark;background:#07080d;color:#f7f1e7}
+*{box-sizing:border-box}
+body{background:radial-gradient(ellipse at 50% 0,#3a2818 0,#111119 36%,#07080d 76%);min-height:100vh}
+.shell{max-width:1180px;padding:clamp(16px,3vw,32px)}
+.eons-top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 0 25px;border-bottom:1px solid #b18a4755;margin-bottom:26px}
+.eons-identity{display:flex;align-items:center;gap:14px;text-decoration:none;color:#f5d38a}
+.eons-identity strong{display:block;font-size:clamp(26px,5vw,38px);letter-spacing:.16em;line-height:1.1}
+.eons-identity small{display:block;font-size:10px;letter-spacing:.1em;color:#cbb68c}
+.eons-orb{width:56px;height:56px;display:grid;place-items:center;flex:none;border-radius:50%;border:3px solid #dbad57;color:#ffdfa0;font-size:28px;background:radial-gradient(circle at 30% 22%,#7ad5ef,#155181 49%,#06172b 78%);box-shadow:0 0 24px #d4a04c55}
+.top-link{color:#edcc8b;text-decoration:none;font-size:13px}
+.hero,.panel,.notice,article,.card{background:linear-gradient(145deg,#1b1b22,#0d1019);border:1px solid #b18a4759;border-radius:24px;box-shadow:0 16px 48px #0007}
+.hero{padding:clamp(24px,5vw,58px)}
+.eyebrow{color:#e6bc70;letter-spacing:.18em;font-size:12px}
+h1{font-size:clamp(2.1rem,5vw,4.6rem);line-height:1.15;letter-spacing:-.03em}
+h1 em{font-style:normal;color:#e6b968}
+h2{color:#f3dfb7}
+.hero p,article p,.notice p{line-height:1.65}
+.status span{background:#17130e;color:#f2d9a9;border:1px solid #ad884c88}
+.dashboard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
+.dashboard>div{border:1px solid #8e713d77;border-radius:18px;padding:18px;background:#14151c}
+.dashboard span,.dashboard strong,.dashboard small{display:block}
+.dashboard span{font-size:10px;letter-spacing:.13em;color:#c6aa74}
+.dashboard strong{font-size:clamp(16px,2vw,24px);margin:8px 0;color:#f4e2b9}
+.dashboard small{color:#aeb5c2}
+.grid{gap:18px}
+article,.panel,.notice,.card{padding:clamp(20px,3vw,30px)}
+button,.card a.button{background:linear-gradient(110deg,#9c7035,#f4d58b,#b7853d);color:#17120b;border:1px solid #e8c77f;border-radius:13px;padding:14px 17px;font-weight:800;cursor:pointer}
+.card a.button{display:block;text-decoration:none;margin:0}
+.card a.button:hover,button:hover{filter:brightness(1.1)}
+.card p{margin:0}
+.nav-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nav-intro{color:#b9bfca;margin:0 0 20px!important;line-height:1.5}
+.nav-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.advanced-nav{margin-top:18px;border:1px solid #8e713d77;border-radius:16px;overflow:hidden}
+.advanced-nav summary{cursor:pointer;display:flex;justify-content:space-between;padding:18px;color:#f4d58b;font-weight:750;background:#17151a}
+.advanced-nav[open] .nav-links{padding:16px}
+pre{background:#080a10;color:#f2dfbb;border:1px solid #8c6a3844}
+@media(max-width:680px){.dashboard{grid-template-columns:1fr 1fr}.dashboard>div:last-child{grid-column:1/-1}.nav-links{grid-template-columns:1fr}.eons-top .top-link{display:none}.eons-identity small{font-size:8px}.hero{padding:25px}.card a.button{font-size:14px}}
