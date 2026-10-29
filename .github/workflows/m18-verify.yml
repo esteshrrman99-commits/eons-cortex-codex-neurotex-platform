@@ -1,0 +1,32 @@
+name: EONS M18 Safety and Reconciliation Checks
+on:
+  push:
+    branches: [main, eons-m18-safe-reconciliation-core-20261029]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JavaScript syntax
+        run: |
+          node --check public/assets/m18-reconciliation.js
+          node --check src/evidence-provenance.js
+          node --check src/tax-rule-registry.js
+      - name: Run deterministic safety tests
+        run: node --test tests/m18-*.test.js
+      - name: Build and verify static preview
+        run: |
+          npm run build
+          npm run verify
+          test -s docs/pages/reconciliation-lab.html
+          test -s docs/assets/m18-reconciliation.js
+          grep -q 'DEMO / NO LIVE DATA' docs/pages/reconciliation-lab.html
+      - name: Enforce no production publishing
+        run: echo "CI validates source only; production deployment is separately gated."
