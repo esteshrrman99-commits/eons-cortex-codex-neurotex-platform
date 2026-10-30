@@ -7,6 +7,7 @@ LIVE="${EONS_LIVE:-$APP/docs}"
 STATE="${EONS_STATE:-/opt/eons-tax-platform/m20}"
 BASE="${EONS_BASE:-https://eons-tax.142-93-114-74.sslip.io}"
 TRUSTED_KEY="${EONS_TRUSTED_PUBKEY:-/etc/eons-deploy/release-public.pem}"
+ATTESTATION_DIR="${EONS_ATTESTATION_DIR:-}"
 VERIFIER="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/m20-signed-preflight.py"
 REF="${1:-}"
 EXPECTED="${2:-}"
@@ -16,6 +17,8 @@ fi
 for cmd in git python3 openssl flock curl tar; do command -v "$cmd" >/dev/null || exit 2; done
 test -f "$VERIFIER" || { echo "DENIED: trusted verifier unavailable" >&2; exit 2; }
 test -f "$TRUSTED_KEY" && test ! -L "$TRUSTED_KEY" || { echo "DENIED: trusted public key missing" >&2; exit 2; }
+[[ "$ATTESTATION_DIR" == /* && -d "$ATTESTATION_DIR" && ! -L "$ATTESTATION_DIR" ]] || { echo "DENIED: detached signed attestation required" >&2; exit 2; }
+[[ "$LIVE" == /* && "$STATE" == /* && ! -L "$LIVE" ]] || { echo "DENIED: unsafe deployment path" >&2; exit 2; }
 test -d "$APP/.git" && test -s "$LIVE/index.html" && test -s "$LIVE/assets/eons-m17.css" || exit 2
 # Refuse root execution: provision a dedicated least-privilege worker before use.
 if [[ "$(id -u)" == 0 ]]; then echo "DENIED: root execution" >&2; exit 2; fi
@@ -24,6 +27,7 @@ exec 9>"$STATE/deploy.lock"
 flock -n 9 || { echo "DENIED: deployment in progress" >&2; exit 3; }
 STAGE="$(mktemp -d "${TMPDIR:-/tmp}/eons-m20-release-XXXXXXXX")"
 declare -a ADDED=()
+declare -a TEMPS=()
 COMMITTED=0
 rollback() {
   local rel
@@ -34,6 +38,7 @@ cleanup() {
   local status=$?
   trap - EXIT
   if [[ "$COMMITTED" != 1 && ${#ADDED[@]} -gt 0 ]]; then rollback; fi
+  if [[ ${#TEMPS[@]} -gt 0 ]]; then rm -f -- "${TEMPS[@]}" || true; fi
   rm -rf -- "$STAGE"
   exit "$status"
 }
@@ -44,7 +49,7 @@ git -C "$APP" -c safe.directory="$APP" fetch --no-tags origin "refs/heads/$REF"
 ACTUAL="$(git -C "$APP" -c safe.directory="$APP" rev-parse FETCH_HEAD)"
 [[ "$ACTUAL" == "$EXPECTED" ]] || { echo "DENIED: commit mismatch" >&2; exit 4; }
 git -C "$APP" -c safe.directory="$APP" archive "$ACTUAL" | tar -xf - -C "$STAGE"
-python3 "$VERIFIER" "$STAGE" "$EXPECTED" "$TRUSTED_KEY" || exit 5
+python3 "$VERIFIER" "$STAGE" "$EXPECTED" "$TRUSTED_KEY" "$ATTESTATION_DIR" || exit 5
 MANIFEST="$STAGE/deploy/m20-additive-manifest.sha256"
 # Preflight all destinations BEFORE first write; refuse symlinked ancestors.
 while IFS= read -r line; do
@@ -65,10 +70,15 @@ while IFS= read -r line; do
   rel="${rel#docs/}"
   target="$LIVE/$rel"
   mkdir -p "$(dirname "$target")"
-  # noclobber with exclusive creation: no existing file may be replaced.
-  (set -C; cat -- "$STAGE/docs/$rel" > "$target") || exit 6
+  # Write a complete temporary file before atomically creating the final name.
+  # ln fails if the target already exists; it never replaces an existing file.
+  tmp="$(mktemp "$(dirname "$target")/.eons-m20-XXXXXXXX")"
+  TEMPS+=("$tmp")
+  cat -- "$STAGE/docs/$rel" > "$tmp"
+  chmod 0644 "$tmp"
+  ln -- "$tmp" "$target" || exit 6
   ADDED+=("$rel")
-  chmod 0644 "$target"
+  rm -f -- "$tmp"
 done < "$MANIFEST"
 for rel in "${ADDED[@]}"; do
   code="$(curl --max-time 12 -sS -o /dev/null -w '%{http_code}' "$BASE/$rel")"
