@@ -69,7 +69,7 @@ while IFS= read -r line; do
   rel="${line:66}"
   rel="${rel#docs/}"
   target="$LIVE/$rel"
-  mkdir -p "$(dirname "$target")"
+  [[ -d "$(dirname "$target")" && ! -L "$(dirname "$target")" ]] || { echo "DENIED: destination directory unavailable" >&2; exit 6; }
   # Write a complete temporary file before atomically creating the final name.
   # ln fails if the target already exists; it never replaces an existing file.
   tmp="$(mktemp "$(dirname "$target")/.eons-m20-XXXXXXXX")"
