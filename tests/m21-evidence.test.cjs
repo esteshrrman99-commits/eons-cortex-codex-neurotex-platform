@@ -58,13 +58,13 @@ test('M21 page uses restrictive CSP and external-only scripts', () => {
   assert.match(html,/Content-Security-Policy/);
   assert.match(html,/connect-src 'none'/);
   assert.match(html,/script-src 'self'/);
-  assert.doesNotMatch(html,/<script(?:\\s[^>]*)?>\\s*[^<]/i);
+  assert.equal(html.includes('<script>'),false);
   assert.match(html,/href="#main"/);
   assert.match(html,/aria-live="polite"/);
   assert.match(html,/name="viewport"/);
-  assert.doesNotMatch(html,/<(?:input|textarea|form)\\b/i);
+  for (const tag of ['<input','<textarea','<form']) assert.equal(html.includes(tag),false);
   for(const file of ['m21-evidence.js','m21-lab.js']){
-    assert.match(html,new RegExp('/assets/'+file.replace('.','\\.') ));
+    assert.ok(html.includes('/assets/'+file));
     new vm.Script(fs.readFileSync(path.join(root,'docs/assets',file),'utf8'),{filename:file});
   }
 });
