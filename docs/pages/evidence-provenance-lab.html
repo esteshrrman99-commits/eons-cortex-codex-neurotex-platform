@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow"><meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'"><meta name="color-scheme" content="dark">
 <title>EONS | Evidence Provenance &amp; Tax Version Lab — Synthetic Demo</title>
 <style>
 :root{font-family:system-ui,-apple-system,sans-serif;color:#f3f7ff;background:#080f1d}*{box-sizing:border-box}
@@ -32,30 +33,6 @@ button:hover{background:#ffe4b5}pre{background:#081120;border:1px solid #abcfe95
 <section class="card" aria-labelledby="tax-title"><h2 id="tax-title">Tax-rule version gate</h2><p>Record jurisdiction, tax year, effective dates, source URL, and review status. The gate never calculates a tax amount or authorizes filing.</p><button type="button" id="run-tax">Inspect synthetic rule version</button><pre id="tax-output" role="status" aria-live="polite">Ready. No rule reviewed.</pre></section></div>
 <p class="muted">Security note: a metadata hash is not a digital signature, chain-of-custody attestation, or third-party source verification. No information entered here is transmitted because this page has no input fields or network calls.</p>
 </main><footer><p>EONS M21 · demo-only financial compliance engineering · Independent qualified review required.</p></footer>
-<script src="/assets/m21-evidence.js"></script>
-<script>
-(function () {
-  'use strict';
-  const out = document.getElementById('evidence-output');
-  const taxOut = document.getElementById('tax-output');
-  document.getElementById('run-evidence').addEventListener('click', async function () {
-    try {
-      const item = {id:'DOC-DEMO-1',sourceType:'bank_statement',sourceSha256:'a'.repeat(64),sourceRef:'SYNTHETIC-1',capturedAt:'2026-10-31T21:00:00Z'};
-      const result = await window.EonsEvidence.metadataFingerprint(item);
-      out.textContent = ['EVIDENCE ID: '+item.id,'METADATA SHA-256: '+result.metadataSha256,
-        'SOURCE AUTHENTICITY VERIFIED: NO','CHAIN OF CUSTODY VERIFIED: NO','REVIEW REQUIRED: YES','AUTOMATIC POSTING: DISABLED'].join('\n');
-    } catch (err) { out.textContent = 'Demo unavailable: '+err.message; }
-  });
-  document.getElementById('run-tax').addEventListener('click', function () {
-    try {
-      const entry = {ruleId:'SYNTHETIC-RULE',jurisdiction:'US-FED',taxYear:2026,version:'1.0.0',
-        sourceUrl:'https://example.org/synthetic',retrievedAt:'2026-10-31T21:00:00Z',
-        effectiveFrom:'2026-01-01',effectiveThrough:'2026-12-31',reviewStatus:'draft'};
-      const result = window.EonsEvidence.taxRuleGate([entry],{jurisdiction:'US-FED',taxYear:2026,asOf:'2026-10-31'});
-      taxOut.textContent = ['MODE: '+result.mode,'MATCHING VERSIONS: '+result.matches,'REVIEW: '+result.reviewStatus,
-        'STATUS: '+result.reason,'TAX CALCULATION AUTHORIZED: NO','FILING AUTHORIZED: NO','LEGAL CONCLUSION: NONE'].join('\n');
-    } catch (err) { taxOut.textContent = 'Demo unavailable: '+err.message; }
-  });
-})();
-</script>
+<script defer src="/assets/m21-evidence.js"></script>
+<script defer src="/assets/m21-lab.js"></script>
 </body></html>
