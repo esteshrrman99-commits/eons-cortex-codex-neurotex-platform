@@ -58,6 +58,10 @@ test('M21 page uses restrictive CSP and external-only scripts', () => {
   assert.match(html,/Content-Security-Policy/);
   assert.match(html,/connect-src 'none'/);
   assert.match(html,/script-src 'self'/);
+  assert.match(html,/style-src 'self'/);
+  assert.equal(html.includes('<style>'),false);
+  assert.ok(html.includes('/assets/m21-lab.css'));
+  assert.match(fs.readFileSync(path.join(root,'docs/assets/m21-lab.css'),'utf8'),/prefers-reduced-motion/);
   assert.equal(html.includes('<script>'),false);
   assert.match(html,/href="#main"/);
   assert.match(html,/aria-live="polite"/);
