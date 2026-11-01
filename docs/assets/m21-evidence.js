@@ -65,15 +65,38 @@
       sourceAuthenticityVerified: false, chainOfCustodyVerified: false, reviewRequired: true });
   }
   function candidateEvidence(reconciliation, bankRows, ledgerRows, evidence) {
-    if (!reconciliation || reconciliation.mode !== 'DEMONSTRATION_ONLY' || !Array.isArray(reconciliation.matches))
-      fail('Only demonstration reconciliation results are supported');
+    if (!reconciliation || reconciliation.mode !== 'DEMONSTRATION_ONLY' || !Array.isArray(reconciliation.matches) ||
+        reconciliation.matches.length > MAX_ITEMS) fail('Only bounded demonstration reconciliation results are supported');
     const registry = new Set(evidenceRegistry(evidence).map(e => e.id));
-    const bank = new Map(bankRows.map(row => [row.id, row.evidence_id]));
-    const ledger = new Map(ledgerRows.map(row => [row.id, row.evidence_id]));
+    function references(rows, label) {
+      if (!Array.isArray(rows) || rows.length > MAX_ITEMS) fail(label + ' rows must be a bounded array');
+      const byId = new Map();
+      for (const row of rows) {
+        if (!row || typeof row !== 'object' || Array.isArray(row)) fail('Invalid ' + label + ' row');
+        // Match the M18 engine's row-ID normalization; never silently overwrite a duplicate.
+        const id = String(row.id || '').trim();
+        if (!id || id.length > 120 || byId.has(id)) fail('Invalid or duplicate ' + label + ' row ID');
+        const ref = row.evidence_id == null ? '' : row.evidence_id;
+        if (typeof ref !== 'string' || (ref && !ID.test(ref))) fail('Invalid ' + label + ' evidence reference');
+        byId.set(id, ref);
+      }
+      return byId;
+    }
+    const bank = references(bankRows, 'bank');
+    const ledger = references(ledgerRows, 'ledger');
+    const usedBank = new Set();
+    const usedLedger = new Set();
     return reconciliation.matches.map(match => {
+      if (!match || typeof match.bankId !== 'string' || typeof match.ledgerId !== 'string' ||
+          match.status !== 'candidate' || !bank.has(match.bankId) || !ledger.has(match.ledgerId) ||
+          usedBank.has(match.bankId) || usedLedger.has(match.ledgerId)) {
+        fail('Invalid or duplicated reconciliation candidate');
+      }
+      usedBank.add(match.bankId);
+      usedLedger.add(match.ledgerId);
       const bankEvidence = bank.get(match.bankId);
       const ledgerEvidence = ledger.get(match.ledgerId);
-      const referencesPresent = typeof bankEvidence === 'string' && typeof ledgerEvidence === 'string' &&
+      const referencesPresent = !!bankEvidence && !!ledgerEvidence &&
         registry.has(bankEvidence) && registry.has(ledgerEvidence);
       return { bankId: match.bankId, ledgerId: match.ledgerId,
         evidenceStatus: referencesPresent ? 'metadata_references_present_not_verified' : 'missing_evidence_metadata',
