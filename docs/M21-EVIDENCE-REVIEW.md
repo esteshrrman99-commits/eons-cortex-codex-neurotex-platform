@@ -29,7 +29,7 @@ Qualified reviewers must verify actual authority and tax-year applicability, app
 ## M21.1 security and accessibility hardening (2026-11-01)
 
 - The reconciliation evidence bridge rejects duplicate normalized bank/ledger IDs, orphaned or repeated candidate matches, non-candidate statuses, malformed evidence IDs, and oversized arrays. It still **never** authorizes posting.
-- The standalone demonstration page now uses external scripts and a document-level Content Security Policy with `connect-src 'none'`, `script-src 'self'`, `form-action 'none'`, and `object-src 'none'`. The static page retains inline CSS, so `style-src 'unsafe-inline'` remains necessary until CSS is extracted.
+- The standalone demonstration page now uses external scripts and CSS with a document-level Content Security Policy: `connect-src 'none'`, `script-src 'self'`, `style-src 'self'`, `form-action 'none'`, and `object-src 'none'`. No inline script or stylesheet is required.
 - The CSP meta tag is defense-in-depth, **not** a substitute for server-set HTTP CSP, `frame-ancestors`, `X-Content-Type-Options`, or a reviewed hosting configuration.
 - Five additional synthetic Node regression/smoke tests were added (20 tests total by test declarations); `npm run test:eons` runs the committed suite. The new smoke checks cover external scripts, the mobile viewport, keyboard skip link, live regions, and absence of input fields.
 - A V8 source-level smoke check passed 9/9 checks against fetched GitHub files. This is **not** a substitute for executing the full committed Node test runner or browser accessibility testing.
