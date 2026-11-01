@@ -21,3 +21,50 @@ test('missing, expired, and ambiguous tax versions fail closed', () => { const q
 test('reject duplicate rule versions and invalid effective dates', () => { const q={jurisdiction:'US-FED',taxYear:2026,asOf:'2026-10-31'}; assert.throws(() => e.taxRuleGate([rule(),rule()],q)); assert.throws(() => e.ruleMetadata(rule({effectiveFrom:'2026-02-30'}))); assert.throws(() => e.ruleMetadata(rule({effectiveFrom:'2026-12-31',effectiveThrough:'2026-01-01'}))); });
 test('reject HTTP and credentialed tax source URLs', () => { assert.throws(() => e.ruleMetadata(rule({sourceUrl:'http://example.org'}))); assert.throws(() => e.ruleMetadata(rule({sourceUrl:'https://user:password@example.org'}))); });
 test('reject unknown tax metadata fields', () => assert.throws(() => e.ruleMetadata(rule({taxRate:0.75}))));
+
+test('reject duplicate normalized bank IDs instead of silently replacing evidence', () => {
+  const b=[{id:'B1',evidence_id:'DOC-B1'},{id:' B1 ',evidence_id:'DOC-B2'}];
+  const l=[{id:'L1',evidence_id:'DOC-L1'}];
+  assert.throws(() => e.candidateEvidence({mode:'DEMONSTRATION_ONLY',matches:[]},b,l,[evidence()]), /duplicate bank row ID/);
+});
+test('reject malformed, orphaned, or duplicate candidate matches', () => {
+  const b=[{id:'B1',evidence_id:'DOC-B1'}],l=[{id:'L1',evidence_id:'DOC-L1'}];
+  const m={bankId:'B1',ledgerId:'L1',status:'candidate'};
+  const run=matches=>e.candidateEvidence({mode:'DEMONSTRATION_ONLY',matches},b,l,[evidence()]);
+  assert.throws(() => run([{...m,bankId:'UNKNOWN'}]), /Invalid or duplicated/);
+  assert.throws(() => run([m,m]), /Invalid or duplicated/);
+  assert.throws(() => run([{...m,status:'posted'}]), /Invalid or duplicated/);
+});
+test('reject malformed evidence references and unbounded candidate inputs', () => {
+  const result={mode:'DEMONSTRATION_ONLY',matches:[]};
+  assert.throws(() => e.candidateEvidence(result,[{id:'B1',evidence_id:'not-an-id'}],[],[]), /Invalid bank evidence reference/);
+  assert.throws(() => e.candidateEvidence(result,new Array(2001).fill({id:'B1'}),[],[]), /bounded array/);
+});
+test('M18 normalized numeric row IDs remain linkable without posting authority', () => {
+  const b=[{id:1,date:'2026-10-31',amount:'5.00',evidence_id:'DOC-B1'}];
+  const l=[{id:2,date:'2026-10-31',amount:'5.00',evidence_id:'DOC-L1'}];
+  const matches=recon.reconcile(b,l);
+  const x=e.candidateEvidence(matches,b,l,[evidence(),{...evidence('DOC-L1'),sourceType:'ledger_export'}]);
+  assert.equal(x.length,1);
+  assert.equal(x[0].evidenceStatus,'metadata_references_present_not_verified');
+  assert.equal(x[0].postingAuthorized,false);
+});
+test('M21 page uses restrictive CSP and external-only scripts', () => {
+  const fs=require('node:fs');
+  const path=require('node:path');
+  const vm=require('node:vm');
+  const root=path.resolve(__dirname,'..');
+  const html=fs.readFileSync(path.join(root,'docs/pages/evidence-provenance-lab.html'),'utf8');
+  assert.match(html,/Content-Security-Policy/);
+  assert.match(html,/connect-src 'none'/);
+  assert.match(html,/script-src 'self'/);
+  assert.doesNotMatch(html,/<script(?:\\s[^>]*)?>\\s*[^<]/i);
+  assert.match(html,/href="#main"/);
+  assert.match(html,/aria-live="polite"/);
+  assert.match(html,/name="viewport"/);
+  assert.doesNotMatch(html,/<(?:input|textarea|form)\\b/i);
+  for(const file of ['m21-evidence.js','m21-lab.js']){
+    assert.match(html,new RegExp('/assets/'+file.replace('.','\\.') ));
+    new vm.Script(fs.readFileSync(path.join(root,'docs/assets',file),'utf8'),{filename:file});
+  }
+});
