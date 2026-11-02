@@ -36,7 +36,7 @@
       auditOut.textContent = ['STATUS: '+audit.consistency,'CANDIDATES: '+audit.candidateCount,
         'MISSING EVIDENCE REFERENCES: '+audit.missingEvidenceCount,
         'SOURCE AUTHENTICITY VERIFIED: NO','REVIEWER APPROVAL: NO',
-        'POSTING AUTHORIZED: NO','TAX CALCULATION AUTHORIZED: NO'].join('\\n');
+        'POSTING AUTHORIZED: NO','TAX CALCULATION AUTHORIZED: NO'].join('\n');
     } catch (err) { auditOut.textContent = 'Demo unavailable: '+err.message; }
   });
 })();
