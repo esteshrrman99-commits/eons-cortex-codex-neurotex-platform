@@ -143,5 +143,45 @@
       reason: candidates.length === 0 ? 'no_applicable_version' : candidates.length > 1 ? 'ambiguous_versions' : 'metadata_not_tax_authority',
       calculationAuthorized: false, filingAuthorized: false, legalConclusionProvided: false });
   }
-  return Object.freeze({ evidenceMetadata, evidenceRegistry, metadataFingerprint, candidateEvidence, ruleMetadata, taxRuleGate });
+  // Recompute the demonstration reconciliation before presenting an evidence audit.
+  // Consistency with an algorithm is NOT independent evidence or financial authorization.
+  function reconciliationConsistency(submitted, bankRows, ledgerRows, evidence, reconcileFn, options) {
+    if (typeof reconcileFn !== 'function') fail('A trusted reconciliation function is required');
+    const expected = reconcileFn(bankRows, ledgerRows, options);
+    function canonical(value, depth) {
+      if (depth > 8) fail('Reconciliation structure exceeds depth limit');
+      if (value === null || typeof value === 'boolean') return JSON.stringify(value);
+      if (typeof value === 'string') {
+        if (value.length > 500) fail('Oversized reconciliation string');
+        return JSON.stringify(value);
+      }
+      if (typeof value === 'number' && Number.isFinite(value) && Number.isSafeInteger(value))
+        return JSON.stringify(value);
+      if (Array.isArray(value)) {
+        if (value.length > MAX_ITEMS) fail('Oversized reconciliation array');
+        return '[' + value.map(x => canonical(x, depth + 1)).join(',') + ']';
+      }
+      if (value && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype) {
+        const keys = Object.keys(value).sort();
+        if (keys.length > 32) fail('Oversized reconciliation object');
+        return '{' + keys.map(k => JSON.stringify(k) + ':' + canonical(value[k], depth + 1)).join(',') + '}';
+      }
+      fail('Invalid reconciliation structure');
+    }
+    if (!expected || expected.mode !== 'DEMONSTRATION_ONLY' ||
+        canonical(submitted, 0) !== canonical(expected, 0))
+      fail('Reconciliation output differs from recomputed demonstration result');
+    const refs = candidateEvidence(expected, bankRows, ledgerRows, evidence);
+    return Object.freeze({
+      mode: 'DEMONSTRATION_ONLY',
+      consistency: 'algorithmically_consistent_unverified',
+      candidateCount: refs.length,
+      missingEvidenceCount: refs.filter(r => r.evidenceStatus === 'missing_evidence_metadata').length,
+      sourceAuthenticityVerified: false,
+      reviewerApproved: false,
+      postingAuthorized: false,
+      taxCalculationAuthorized: false
+    });
+  }
+  return Object.freeze({ evidenceMetadata, evidenceRegistry, metadataFingerprint, candidateEvidence, reconciliationConsistency, ruleMetadata, taxRuleGate });
 });
