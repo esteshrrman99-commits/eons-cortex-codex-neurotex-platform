@@ -21,4 +21,22 @@
         'STATUS: '+result.reason,'TAX CALCULATION AUTHORIZED: NO','FILING AUTHORIZED: NO','LEGAL CONCLUSION: NONE'].join('\n');
     } catch (err) { taxOut.textContent = 'Demo unavailable: '+err.message; }
   });
+  document.getElementById('run-audit').addEventListener('click', function () {
+    const auditOut = document.getElementById('audit-output');
+    try {
+      const bank = [{id:'SYN-B-1',date:'2026-10-31',amount:'25.00',evidence_id:'DOC-DEMO-B'}];
+      const ledger = [{id:'SYN-L-1',date:'2026-10-31',amount:'25.00',evidence_id:'DOC-DEMO-L'}];
+      const evidence = [
+        {id:'DOC-DEMO-B',sourceType:'bank_statement',sourceSha256:'a'.repeat(64),sourceRef:'SYNTHETIC-B',capturedAt:'2026-10-31T21:00:00Z'},
+        {id:'DOC-DEMO-L',sourceType:'ledger_export',sourceSha256:'b'.repeat(64),sourceRef:'SYNTHETIC-L',capturedAt:'2026-10-31T21:00:00Z'}
+      ];
+      const result = window.EonsReconciliation.reconcile(bank, ledger);
+      const audit = window.EonsEvidence.reconciliationConsistency(
+        result, bank, ledger, evidence, window.EonsReconciliation.reconcile);
+      auditOut.textContent = ['STATUS: '+audit.consistency,'CANDIDATES: '+audit.candidateCount,
+        'MISSING EVIDENCE REFERENCES: '+audit.missingEvidenceCount,
+        'SOURCE AUTHENTICITY VERIFIED: NO','REVIEWER APPROVAL: NO',
+        'POSTING AUTHORIZED: NO','TAX CALCULATION AUTHORIZED: NO'].join('\\n');
+    } catch (err) { auditOut.textContent = 'Demo unavailable: '+err.message; }
+  });
 })();
