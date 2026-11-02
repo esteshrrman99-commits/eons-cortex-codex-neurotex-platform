@@ -37,3 +37,12 @@ Qualified reviewers must verify actual authority and tax-year applicability, app
 ### Release gates still open
 
 Run `npm run test:eons` against the actual GitHub checkout; review the static page with keyboard, 320px mobile viewport, and a screen reader; verify effective HTTP headers and CSP in the deployed hosting stack; keep M17 live `docs/` unchanged. The M20 signed deployment pipeline is a separate draft PR and is not production-certified.
+
+## M21.2 synthetic reconciliation consistency audit (2026-11-02)
+
+- A third accessible, mobile-responsive lab card recomputes an invented USD transaction pair using the existing M18 integer-cent engine before reporting evidence-reference coverage.
+- `reconciliationConsistency` compares the full supplied demonstration result to a fresh result from the provided M18 reconciliation function. A changed amount, injected match, or extra approval field is rejected; missing evidence metadata is explicitly counted.
+- The result is strictly **algorithmic consistency, not source authenticity, independent audit, qualified review, or permission to post**. `postingAuthorized`, `reviewerApproved`, and `taxCalculationAuthorized` remain `false`.
+- Eight new synthetic regression/interface test declarations were added in `tests/m21-consistency.test.cjs`. `npm run test:eons` now includes both M21 test files (28 declared tests total).
+- V8 source-level checks confirmed the two modules parse, the new audit card script parses, a synthetic pair produces one candidate with no posting permission, a changed amount is rejected, and missing evidence is reported. The **committed Node test runner and browser-based accessibility checks are still pending**.
+- No live `docs/` files were replaced; never run the repository build command against the M17 production checkout.
