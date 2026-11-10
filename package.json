@@ -3,7 +3,7 @@
     "build": "node scripts/build.js",
     "verify": "node scripts/verify.js",
     "proof": "node scripts/proof-ledger.js",
-    "test:eons": "node --test tests/m21-evidence.test.cjs tests/m21-consistency.test.cjs tests/m21-boundaries.test.cjs tests/m21-accessibility-contract.test.cjs tests/m21-demo-safety-contract.test.cjs tests/m21-tax-authority-boundary.test.cjs tests/m21-ci-safety-contract.test.cjs"
+    "test:eons": "node --test tests/m21-evidence.test.cjs tests/m21-consistency.test.cjs tests/m21-boundaries.test.cjs tests/m21-accessibility-contract.test.cjs tests/m21-demo-safety-contract.test.cjs tests/m21-tax-authority-boundary.test.cjs tests/m21-ci-safety-contract.test.cjs tests/m21-ci-trust-boundary.test.cjs"
   },
   "devDependencies": {}
 }
