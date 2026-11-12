@@ -30,7 +30,7 @@ test('navigation links stay local and never open unprotected new tabs', () => {
   const hrefs = [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)].map(m => m[1]);
   assert.ok(hrefs.length >= 2);
   for (const href of hrefs) {
-    assert.match(href, /^(?:\/#main|\/|\/pages\/[a-z0-9-]+\.html)$/i);
+    assert.match(href, /^(?:#main|\/#main|\/|\/pages\/[a-z0-9-]+\.html)$/i);
   }
   assert.doesNotMatch(html, /\btarget\s*=\s*["']_blank["']/i);
 });
