@@ -1,0 +1,16 @@
+/* EONS M21: responsive, reduced-motion synthetic compliance lab. */
+:root{font-family:system-ui,-apple-system,sans-serif;color:#f3f7ff;background:#080f1d}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 80% 0%,#173e58 0%,transparent 54%),radial-gradient(ellipse at 0% 95%,#463158 0%,transparent 55%),#080f1d}
+.skip{position:absolute;top:-100px;left:12px;padding:12px;background:#fff;color:#07121d;z-index:2}.skip:focus{top:8px}
+header,main,footer{max-width:1100px;margin:auto;padding:clamp(16px,4vw,32px)}nav{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+a{color:#a9edff}a:focus-visible,button:focus-visible{outline:3px solid #ffe3a6;outline-offset:4px}
+.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;color:#f7fbff}.badge{border:1px solid #d9b877;border-radius:99px;padding:8px 12px;color:#ffe8ba;font-size:.8rem}
+h1{font-size:clamp(2.1rem,6vw,4.5rem);line-height:1.09;letter-spacing:-.045em;margin:.35em 0}h2{font-size:1.35rem;margin-top:0}
+p{line-height:1.65;color:#d4e1ed;max-width:75ch}.eyebrow{color:#b9eaff;font-size:.8rem;letter-spacing:.15em;font-weight:800}
+.hero,.card{border:1px solid #a8e3fa60;background:linear-gradient(145deg,#193c54bd,#18223dbd 70%,#35283eb0);border-radius:24px;box-shadow:0 16px 48px #0006,inset 0 1px #fff2}
+.hero{padding:clamp(24px,5vw,48px);margin-bottom:22px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.card{padding:24px}
+button{font:inherit;font-weight:800;border-radius:14px;padding:14px 18px;min-height:48px;border:1px solid #ffdea2;color:#091521;background:#f4cf8e;cursor:pointer}
+button:hover{background:#ffe4b5}pre{background:#081120;border:1px solid #abcfe95a;border-radius:14px;color:#e9f7ff;padding:16px;white-space:pre-wrap;overflow-wrap:anywhere;min-height:180px;font-size:.9rem}
+.notice{border-left:4px solid #ffcf8a;padding:12px 16px;background:#ffc57c18}.muted{font-size:.92rem}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.card{padding:18px}button{width:100%}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
