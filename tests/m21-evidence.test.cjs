@@ -72,3 +72,23 @@ test('M21 page uses restrictive CSP and external-only scripts', () => {
     new vm.Script(fs.readFileSync(path.join(root,'docs/assets',file),'utf8'),{filename:file});
   }
 });
+
+test('provenance digest changes when synthetic source reference changes', async () => {
+  const original = await e.metadataFingerprint(evidence());
+  const changed = await e.metadataFingerprint({...evidence(), sourceRef: 'SYNTHETIC-2'});
+  assert.notEqual(original.metadataSha256, changed.metadataSha256);
+  assert.equal(changed.sourceAuthenticityVerified, false);
+});
+
+test('provenance digest changes when synthetic source type changes', async () => {
+  const original = await e.metadataFingerprint(evidence());
+  const changed = await e.metadataFingerprint({...evidence(), sourceType: 'ledger_export'});
+  assert.notEqual(original.metadataSha256, changed.metadataSha256);
+  assert.equal(changed.reviewRequired, true);
+});
+
+test('draft tax metadata never confers calculation or filing authority', () => {
+  const gate = e.taxRuleGate([rule()], {jurisdiction: 'US-FED', taxYear: 2026, asOf: '2026-10-31'});
+  assert.equal(gate.calculationAuthorized, false);
+  assert.equal(gate.filingAuthorized, false);
+});
