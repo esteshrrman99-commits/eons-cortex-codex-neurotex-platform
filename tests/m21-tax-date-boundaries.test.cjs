@@ -55,3 +55,28 @@ test('malformed leap days and query fields are rejected', () => {
   assert.throws(() => e.taxRuleGate([rule()], { ...request('2026-10-31'), taxpayerId: 'SYNTHETIC' }), TypeError);
   assert.throws(() => e.ruleMetadata(rule({ retrievedAt: '2026-11-31T21:00:00Z' })), TypeError);
 });
+
+test('valid leap-day applicability stays metadata-only', () => {
+  const entry = rule({ taxYear: 2024, effectiveFrom: '2024-02-29', effectiveThrough: '2024-02-29' });
+  const result = e.taxRuleGate([entry], { jurisdiction: 'US-FED', taxYear: 2024, asOf: '2024-02-29' });
+  assert.equal(result.matches, 1);
+  assert.equal(result.reason, 'metadata_not_tax_authority');
+  assert.equal(result.calculationAuthorized, false);
+  assert.equal(result.filingAuthorized, false);
+  assert.equal(result.legalConclusionProvided, false);
+});
+
+test('duplicate rule-version identity is rejected before selection', () => {
+  assert.throws(() => e.taxRuleGate([rule(), rule({ effectiveFrom: '2026-07-01' })], request('2026-08-01')), TypeError);
+});
+
+test('tax-rule registry is bounded and rejects personal-data fields', () => {
+  assert.throws(() => e.taxRuleGate(Array.from({ length: 2001 }, () => rule()), request('2026-10-31')), TypeError);
+  assert.throws(() => e.ruleMetadata(rule({ taxpayerName: 'SYNTHETIC ONLY' })), TypeError);
+});
+
+test('tax-rule sources reject URL credentials and non-HTTPS schemes', () => {
+  for (const sourceUrl of ['http://example.org/rule', 'https://user:pass@example.org/rule', 'file:///tmp/rule']) {
+    assert.throws(() => e.ruleMetadata(rule({ sourceUrl })), TypeError);
+  }
+});
