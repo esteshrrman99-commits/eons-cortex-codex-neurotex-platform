@@ -80,3 +80,14 @@ test('tax-rule sources reject URL credentials and non-HTTPS schemes', () => {
     assert.throws(() => e.ruleMetadata(rule({ sourceUrl })), TypeError);
   }
 });
+
+test('tax-rule citation hosts reject localhost, private DNS and IP literals', () => {
+  for (const sourceUrl of [
+    'https://localhost/rule', 'https://localhost./rule', 'https://service.local/rule',
+    'https://service.internal/rule', 'https://127.0.0.1/rule',
+    'https://192.168.1.10/rule', 'https://[::1]/rule'
+  ]) {
+    assert.throws(() => e.ruleMetadata(rule({ sourceUrl })), TypeError, sourceUrl);
+  }
+  assert.equal(e.ruleMetadata(rule()).sourceUrl, 'https://example.org/synthetic');
+});
