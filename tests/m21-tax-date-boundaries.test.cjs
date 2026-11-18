@@ -91,3 +91,23 @@ test('tax-rule citation hosts reject localhost, private DNS and IP literals', ()
   }
   assert.equal(e.ruleMetadata(rule()).sourceUrl, 'https://example.org/synthetic');
 });
+
+test('tax citation URL canonicalization preserves metadata-only authority', () => {
+  const normalized = e.ruleMetadata(rule({ sourceUrl: 'https://EXAMPLE.ORG:443/synthetic' }));
+  assert.equal(normalized.sourceUrl, 'https://example.org/synthetic');
+  const result = e.taxRuleGate([rule({ sourceUrl: normalized.sourceUrl })], request('2026-10-31'));
+  assert.equal(result.calculationAuthorized, false);
+  assert.equal(result.filingAuthorized, false);
+});
+
+test('tax citation host rejects localhost subdomains and alternate numeric loopback', () => {
+  for (const sourceUrl of [
+    'https://audit.localhost/rule',
+    'https://127.1/rule',
+    'https://0x7f000001/rule',
+    'https://2130706433/rule',
+    'https://[2001:db8::1]/rule'
+  ]) {
+    assert.throws(() => e.ruleMetadata(rule({ sourceUrl })), TypeError, sourceUrl);
+  }
+});
