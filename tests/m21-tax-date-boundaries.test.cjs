@@ -111,3 +111,14 @@ test('tax citation host rejects localhost subdomains and alternate numeric loopb
     assert.throws(() => e.ruleMetadata(rule({ sourceUrl })), TypeError, sourceUrl);
   }
 });
+
+test('tax citation host rejects repeated trailing DNS root dots', () => {
+  for (const sourceUrl of [
+    'https://localhost../rule',
+    'https://audit.localhost../rule',
+    'https://service.internal../rule',
+    'https://service.local../rule'
+  ]) {
+    assert.throws(() => e.ruleMetadata(rule({ sourceUrl })), TypeError, sourceUrl);
+  }
+});
