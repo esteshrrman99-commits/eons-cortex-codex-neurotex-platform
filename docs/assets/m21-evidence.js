@@ -115,7 +115,7 @@
     try { url = new URL(item.sourceUrl); } catch (_) { fail('Invalid source URL'); }
     if (url.protocol !== 'https:' || url.username || url.password || !url.hostname) fail('Source URL must be HTTPS without credentials');
     // A source citation is metadata, never an invitation to access internal hosts.
-    const host = url.hostname.toLowerCase().replace(/\.$/, '');
+    const host = url.hostname.toLowerCase().replace(/\.+$/, '');
     if (host === 'localhost' || host.endsWith('.localhost') || host.endsWith('.local') ||
         host.endsWith('.internal') || host.startsWith('[') || /^\d+\.\d+\.\d+\.\d+$/.test(host))
       fail('Source URL must not point to a local or literal-IP host');
