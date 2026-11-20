@@ -117,7 +117,8 @@
     // A source citation is metadata, never an invitation to access internal hosts.
     const host = url.hostname.toLowerCase().replace(/\.+$/, '');
     if (host === 'localhost' || host.endsWith('.localhost') || host.endsWith('.local') ||
-        host.endsWith('.internal') || host.startsWith('[') || /^\d+\.\d+\.\d+\.\d+$/.test(host))
+        host.endsWith('.internal') || host === 'home.arpa' || host.endsWith('.home.arpa') ||
+        host === 'localdomain' || host.endsWith('.localdomain') || host.startsWith('[') || /^\d+\.\d+\.\d+\.\d+$/.test(host))
       fail('Source URL must not point to a local or literal-IP host');
     const retrievedAt = exactUtc(item.retrievedAt);
     const effectiveFrom = exactDay(item.effectiveFrom);
