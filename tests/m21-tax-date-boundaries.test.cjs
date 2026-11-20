@@ -122,3 +122,16 @@ test('tax citation host rejects repeated trailing DNS root dots', () => {
     assert.throws(() => e.ruleMetadata(rule({ sourceUrl })), TypeError, sourceUrl);
   }
 });
+
+test('tax citation hosts reject private home.arpa and localdomain namespaces', () => {
+  for (const sourceUrl of [
+    'https://home.arpa/rule',
+    'https://router.home.arpa/rule',
+    'https://LOCALDOMAIN/rule',
+    'https://host.localdomain./rule',
+    'https://host.localdomain../rule'
+  ]) {
+    assert.throws(() => e.ruleMetadata(rule({ sourceUrl })), TypeError, sourceUrl);
+  }
+  assert.equal(e.ruleMetadata(rule()).sourceUrl, 'https://example.org/synthetic');
+});
