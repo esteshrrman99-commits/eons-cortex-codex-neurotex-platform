@@ -7,7 +7,7 @@
 header,main,footer{max-width:1100px;margin:auto;padding:20px}
 nav{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 a{color:#b8f1ff}a:focus-visible,button:focus-visible{outline:3px solid #9befff;outline-offset:4px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#f6fdff;font-weight:850;letter-spacing:.1em}.brand .mark{display:grid;place-items:center;width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,#86e5ff,#8b6dff);box-shadow:0 0 25px #72ddff69;color:#071222;font-size:2rem}
+.skip{position:absolute;left:12px;top:-100px;z-index:10;background:#071222;color:#fff;padding:12px;border:2px solid #9befff;border-radius:8px}.skip:focus{top:12px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#f6fdff;font-weight:850;letter-spacing:.1em}.brand .mark{display:grid;place-items:center;width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,#86e5ff,#8b6dff);box-shadow:0 0 25px #72ddff69;color:#071222;font-size:2rem}
 .badge{border:1px solid #e9beff8c;border-radius:99px;padding:8px 12px;color:#f7d8ff;background:#5e398d36;font-size:.8rem;font-weight:750}
 .hero,.card{border:1px solid #a9edff65;border-radius:28px;background:linear-gradient(135deg,#bfdfff20,#152440c9 55%,#382a5780);box-shadow:inset 0 1px 1px #fff6,0 24px 60px #0008,0 0 45px #64d9ff1c;backdrop-filter:blur(16px)}
 .hero{padding:clamp(24px,5vw,60px);margin:20px 0}.eyebrow{color:#9ae9ff;letter-spacing:.18em;font-size:.8rem;font-weight:800}
@@ -20,8 +20,8 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.9rem;background:#070d
 @media(max-width:700px){.layout{grid-template-columns:1fr}.card{padding:18px}button{width:100%}button+button{margin:10px 0 0}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style></head>
-<body><header><nav aria-label="Lab navigation"><a class="brand" href="/"><span class="mark" aria-hidden="true">✦</span>EONS / INTELLIGENCE FABRIC</a><span class="badge">M18 · DEMO / NO LIVE DATA</span></nav></header>
-<main><section class="hero"><div class="eyebrow">EVIDENCE-LED FINANCIAL INTELLIGENCE</div>
+<body><a class="skip" href="#main">Skip to main content</a><header><nav aria-label="Lab navigation"><a class="brand" href="/"><span class="mark" aria-hidden="true">✦</span>EONS / INTELLIGENCE FABRIC</a><span class="badge">M18 · DEMO / NO LIVE DATA</span></nav></header>
+<main id="main"><section class="hero"><div class="eyebrow">EVIDENCE-LED FINANCIAL INTELLIGENCE</div>
 <h1>Reconciliation.<br>Without guesswork.</h1>
 <p>Experience a conservative matching engine that uses integer cents, exact dates, transaction references, and one-to-one candidate rules. Ambiguity stays visible instead of being silently reconciled.</p>
 <p class="note"><strong>Demo only.</strong> All records below are synthetic. This page does not access bank accounts, accept uploads, calculate taxes, or certify any transaction.</p></section>
@@ -29,7 +29,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.9rem;background:#070d
 <button id="run" type="button">Run Sample Reconciliation ↗</button><button id="reset" type="button">Clear Results</button>
 <p><small>Matching output is provisional until source documents and reviewer sign-off are verified.</small></p>
 <p><a href="/pages/evidence-provenance-lab.html">Explore M21 evidence provenance and tax-rule version review →</a></p></section>
-<section class="card"><h2>Evidence Console</h2><pre id="result" aria-live="polite" aria-label="Reconciliation results">Ready. No records processed.</pre></section></div>
+<section class="card"><h2>Evidence Console</h2><pre id="result" role="status" aria-live="polite" aria-label="Reconciliation results">Ready. No records processed.</pre></section></div>
 </main><footer><p>EONS M18 — evidence-first, review-gated engineering. No guaranteed refunds, filing, or IRS acceptance.</p></footer>
 <script src="/assets/m18-reconciliation.js"></script>
 <script>
