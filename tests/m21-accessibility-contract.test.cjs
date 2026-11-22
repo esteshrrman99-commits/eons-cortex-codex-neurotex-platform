@@ -45,3 +45,15 @@ test('all referenced local assets are present in repository', () => {
     assert.ok(fs.statSync(path.join(root,'docs/assets',name)).isFile(), name);
   }
 });
+
+test('M18 reconciliation demo provides a keyboard skip target and announced results', () => {
+  const reconciliation = read('docs/pages/reconciliation-lab.html');
+  assert.match(reconciliation, /<html\\s+lang="en"/i);
+  assert.match(reconciliation, /name="viewport"/i);
+  assert.match(reconciliation, /class="skip"\\s+href="#main"/);
+  assert.match(reconciliation, /<main\\s+id="main"/);
+  assert.match(reconciliation, /\\.skip:focus\\s*\\{[^}]*top:12px/);
+  assert.match(reconciliation, /<pre\\s+id="result"\\s+role="status"\\s+aria-live="polite"/);
+  assert.match(reconciliation, /prefers-reduced-motion/);
+  assert.doesNotMatch(reconciliation, /\\bautofocus\\b/i);
+});
