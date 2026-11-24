@@ -58,3 +58,11 @@ test('M18 reconciliation demo provides keyboard navigation and announced results
   assert.match(reconciliation, /prefers-reduced-motion/);
   assert.doesNotMatch(reconciliation, /\bautofocus\b/i);
 });
+
+test('M18 reconciliation supports narrow grid reflow and forced colors', () => {
+  const page = read('docs/pages/reconciliation-lab.html');
+  assert.match(page, /<main\s+id="main"\s+tabindex="-1"/);
+  assert.match(page, /grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)/);
+  assert.match(page, /@media\(max-width:700px\)\{\.layout\{grid-template-columns:minmax\(0,1fr\)/);
+  assert.match(page, /@media\(forced-colors:active\)\{h1\{color:CanvasText;background:none\}/);
+});
