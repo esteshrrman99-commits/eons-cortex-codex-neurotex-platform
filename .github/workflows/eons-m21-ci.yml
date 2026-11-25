@@ -1,0 +1,37 @@
+name: EONS M21 synthetic verification
+on:
+  push:
+    branches:
+      - eons-m21-evidence-provenance-20261031
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'tests/**'
+      - 'package.json'
+      - '.github/workflows/eons-m21-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: eons-m21-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  synthetic-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout tested commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify JavaScript and synthetic contracts
+        run: npm run test:eons
