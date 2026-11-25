@@ -49,20 +49,35 @@ test('all referenced local assets are present in repository', () => {
 
 test('M18 reconciliation demo provides keyboard navigation and announced results', () => {
   const reconciliation = read('docs/pages/reconciliation-lab.html');
+  const reconciliationCss = read('docs/assets/m18-lab.css');
   assert.match(reconciliation, /<html\s+lang="en"/i);
   assert.match(reconciliation, /name="viewport"/i);
   assert.match(reconciliation, /class="skip"\s+href="#main"/);
   assert.match(reconciliation, /<main\s+id="main"/);
-  assert.match(reconciliation, /\.skip:focus\s*\{[^}]*top:12px/);
+  assert.match(reconciliationCss, /\.skip:focus\s*\{[^}]*top:12px/);
   assert.match(reconciliation, /<pre\s+id="result"\s+role="status"\s+aria-live="polite"/);
-  assert.match(reconciliation, /prefers-reduced-motion/);
+  assert.match(reconciliationCss, /prefers-reduced-motion/);
   assert.doesNotMatch(reconciliation, /\bautofocus\b/i);
 });
 
 test('M18 reconciliation supports narrow grid reflow and forced colors', () => {
   const page = read('docs/pages/reconciliation-lab.html');
+  const layoutCss = read('docs/assets/m18-lab.css');
   assert.match(page, /<main\s+id="main"\s+tabindex="-1"/);
-  assert.match(page, /grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)/);
-  assert.match(page, /@media\(max-width:700px\)\{\.layout\{grid-template-columns:minmax\(0,1fr\)/);
-  assert.match(page, /@media\(forced-colors:active\)\{h1\{color:CanvasText;background:none\}/);
+  assert.match(layoutCss, /grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)/);
+  assert.match(layoutCss, /@media\(max-width:700px\)\{\.layout\{grid-template-columns:minmax\(0,1fr\)/);
+  assert.match(layoutCss, /@media\(forced-colors:active\)\{h1\{color:CanvasText;background:none\}/);
+});
+
+test('M18 demo uses local external assets and restrictive document CSP', () => {
+  const page = read('docs/pages/reconciliation-lab.html');
+  const script = read('docs/assets/m18-lab.js');
+  assert.match(page, /href="\/assets\/m18-lab\.css"/);
+  assert.match(page, /src="\/assets\/m18-lab\.js"/);
+  assert.doesNotMatch(page, /<style\b|<script\b(?![^>]*\bsrc=)[^>]*>|\sstyle=/i);
+  for (const directive of ["default-src 'none'", "script-src 'self'", "style-src 'self'", "connect-src 'none'", "form-action 'none'", "base-uri 'none'", "object-src 'none'"]) {
+    assert.ok(page.includes(directive), directive);
+  }
+  assert.match(script, /\.textContent\s*=/);
+  assert.doesNotMatch(script, /\b(?:innerHTML|fetch|XMLHttpRequest|WebSocket|localStorage|sessionStorage)\b/);
 });
